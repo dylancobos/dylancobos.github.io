@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Cobos — Ingeniero & Data Analyst</title>
+    <meta name="description" content="Portafolio profesional de Dylan Cobos, Ingeniero & Data Analyst. Desarrollo de software, automatización y análisis de datos.">
+    <meta property="og:title" content="Dylan Cobos — Ingeniero & Data Analyst">
+    <meta property="og:description" content="Portafolio profesional: desarrollo, automatización y datos.">
+    <meta property="og:url" content="https://manosjd.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Variables ── */
+        :root {
+            --bg:           #0a0a0a;
+            --bg-card:      #111111;
+            --bg-card-h:    #161616;
+            --accent:       #00ff88;
+            --accent-dim:   rgba(0,255,136,.08);
+            --accent-glow:  rgba(0,255,136,.25);
+            --text:         #e8e8e8;
+            --text-dim:     #777777;
+            --border:       rgba(255,255,255,.07);
+            --mono:         'JetBrains Mono', monospace;
+            --sans:         'Inter', sans-serif;
+            --radius:       14px;
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ── Nav ── */
+        nav {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 200;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2.5rem;
+            background: rgba(10,10,10,.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -.02em;
+        }
+        .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: .88rem;
+            letter-spacing: .02em;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all .3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* mobile menu */
+        .mob-menu {
+            display: none;
+            position: fixed;
+            top: 62px; left: 0; right: 0;
+            z-index: 199;
+            background: rgba(10,10,10,.97);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem 1.5rem;
+        }
+        .mob-menu.open { display: block; }
+        .mob-menu a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: .85rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+            transition: color .2s;
+        }
+        .mob-menu a:last-child { border-bottom: none; }
+        .mob-menu a:hover { color: var(--accent); }
+
+        /* ── Section base ── */
+        .section-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        .section-tag {
+            font-family: var(--mono);
+            font-size: .75rem;
+            color: var(--accent);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: .6rem;
+            opacity: .8;
+        }
+        .section-title {
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,136,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 20%, transparent 80%);
+            pointer-events: none;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 600px; height: 600px;
+            top: -200px; right: -200px;
+            background: radial-gradient(circle, rgba(0,255,136,.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; max-width: 700px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-glow);
+            color: var(--accent);
+            font-family: var(--mono);
+            font-size: .72rem;
+            padding: .3rem .9rem;
+            border-radius: 999px;
+            margin-bottom: 1.6rem;
+            letter-spacing: .05em;
+        }
+        .hero-badge::before { content: "●"; font-size: .5rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        h1.hero-name {
+            font-size: clamp(2.8rem, 9vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1rem;
+        }
+        h1.hero-name em {
+            font-style: normal;
+            color: var(--accent);
+        }
+        .hero-role {
+            font-family: var(--mono);
+            font-size: clamp(.95rem, 2.5vw, 1.25rem);
+            color: var(--text-dim);
+            margin-bottom: 1.4rem;
+            min-height: 1.8em;
+        }
+        .cursor { color: var(--accent); animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .hero-desc {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 520px;
+            margin-bottom: 2.4rem;
+        }
+        .hero-ctas { display: flex; gap: .9rem; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 1.6rem;
+            border-radius: 9px;
+            font-size: .92rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all .22s;
+        }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover {
+            background: #00e07a;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0,255,136,.35);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .btn-cv {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent-glow);
+        }
+        .btn-cv:hover {
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll-hint {
+            margin-top: 5rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            color: var(--text-dim);
+            font-family: var(--mono);
+            font-size: .72rem;
+            letter-spacing: .1em;
+        }
+        .scroll-bar {
+            width: 36px; height: 1px;
+            background: var(--accent);
+            animation: shrink 2s ease-in-out infinite;
+        }
+        @keyframes shrink { 0%,100%{width:36px;opacity:1} 50%{width:16px;opacity:.3} }
+
+        /* ── ABOUT ── */
+        #about { border-top: 1px solid var(--border); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 2.5rem;
+        }
+        .about-text p {
+            color: var(--text-dim);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+            font-size: .97rem;
+        }
+        .about-text p strong { color: var(--accent); font-weight: 600; }
+        .skills-wrap {
+            margin-top: 1.8rem;
+        }
+        .skills-label {
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--text-dim);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: .8rem;
+        }
+        .skills-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .skill {
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-glow);
+            padding: .28rem .75rem;
+            border-radius: 6px;
+            letter-spacing: .03em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .8rem;
+        }
+        .stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+            text-align: center;
+            transition: border-color .25s;
+        }
+        .stat:hover { border-color: var(--accent-glow); }
+        .stat-n {
+            display: block;
+            font-family: var(--mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: .4rem;
+        }
+        .stat-l { font-size: .78rem; color: var(--text-dim); }
+
+        /* ── PROJECTS ── */
+        #projects { border-top: 1px solid var(--border); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.3rem;
+            margin-top: 2.5rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.7rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform .3s, border-color .3s, background .3s, box-shadow .3s;
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,255,136,.2);
+            background: var(--bg-card-h);
+            box-shadow: 0 24px 48px rgba(0,0,0,.5);
+        }
+        .card:hover::after { opacity: 1; }
+        .card-icon { font-size: 1.8rem; margin-bottom: .9rem; display: block; }
+        .card-title { font-size: 1.08rem; font-weight: 600; margin-bottom: .55rem; }
+        .card-desc {
+            color: var(--text-dim);
+            font-size: .87rem;
+            line-height: 1.65;
+            margin-bottom: 1.1rem;
+        }
+        .card-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.1rem; }
+        .tag {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--text-dim);
+            background: rgba(255,255,255,.05);
+            border-radius: 4px;
+            padding: .2rem .55rem;
+        }
+        .card-links { display: flex; gap: .9rem; }
+        .card-link {
+            font-family: var(--mono);
+            font-size: .78rem;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            opacity: .85;
+            transition: opacity .2s;
+        }
+        .card-link:hover { opacity: 1; }
+
+        /* ── CONTACT ── */
+        #contact { border-top: 1px solid var(--border); }
+        .contact-inner {
+            max-width: 580px;
+            margin: 2rem auto 0;
+            text-align: center;
+        }
+        .contact-inner p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: .8rem;
+            flex-wrap: wrap;
+        }
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .72rem 1.35rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: all .22s;
+        }
+        .contact-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+        .contact-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            background: var(--accent-dim);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+        }
+        footer p {
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        footer span { color: var(--accent); }
+
+        /* ── FADE-IN ── */
+        .fade {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+        .fade.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 800px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            nav { padding: 1rem 1.5rem; }
+            .section-wrap { padding: 4.5rem 1.3rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 500px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .hero-ctas { flex-direction: column; }
+            .btn { justify-content: center; }
+            .hero-scroll-hint { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <a href="#hero" class="nav-logo">&lt;dylan.cobos /&gt;</a>
+    <ul class="nav-links">
+        <li><a href="#about">Sobre mí</a></li>
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menú">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="mob-menu" id="mob">
+    <a href="#about"    onclick="closeMob()">Sobre mí</a>
+    <a href="#projects" onclick="closeMob()">Proyectos</a>
+    <a href="#contact"  onclick="closeMob()">Contacto</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Disponible para proyectos</div>
+        <h1 class="hero-name">Hola, soy<br><em>Dylan Cobos</em></h1>
+        <p class="hero-role"><span id="typing"></span><span class="cursor">|</span></p>
+        <p class="hero-desc">
+            Ingeniero apasionado por convertir datos en decisiones y código en soluciones reales.
+            Construyo sistemas, automatizo procesos y analizo información para generar impacto.
+        </p>
+        <div class="hero-ctas">
+            <a href="#projects" class="btn btn-primary">Ver proyectos ↓</a>
+            <a href="cv.pdf" class="btn btn-cv" download>Descargar CV ↗</a>
+            <a href="#contact" class="btn btn-ghost">Contactarme</a>
+        </div>
+        <div class="hero-scroll-hint">
+            <div class="scroll-bar"></div>
+            scroll para explorar
+        </div>
+    </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+    <div class="section-wrap">
+        <p class="section-tag">// 01. sobre mí</p>
+        <h2 class="section-title">¿Quién soy?</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    Soy <strong>Ingeniero & Data Analyst</strong> con experiencia en desarrollo de software,
+                    automatización de procesos y análisis de datos. Me apasiona resolver problemas
+                    complejos con soluciones elegantes y eficientes.
+                </p>
+                <p>
+                    Trabajo con <strong>Python</strong>, <strong>JavaScript</strong> y herramientas de datos
+                    para construir sistemas que realmente hacen la diferencia — desde automatizaciones que
+                    ahorran horas de trabajo hasta dashboards que revelan insights ocultos.
+                </p>
+                <p>
+                    Actualmente enfocado en proyectos que mezclan ingeniería con inteligencia de datos.
+                    Siempre aprendiendo, siempre construyendo.
+                </p>
+                <div class="skills-wrap">
+                    <p class="skills-label">Stack tecnológico</p>
+                    <div class="skills-list">
+                        <span class="skill">Python</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">SQL</span>
+                        <span class="skill">Data Analysis</span>
+                        <span class="skill">Automatización</span>
+                        <span class="skill">Excel / VBA</span>
+                        <span class="skill">Google Apps Script</span>
+                        <span class="skill">Machine Learning</span>
+                        <span class="skill">Backend Dev</span>
+                        <span class="skill">Cisco / Redes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat fade">
+                    <span class="stat-n">10+</span>
+                    <div class="stat-l">Proyectos completados</div>
+                </div>
+                <div class="stat fade">
+                    <span class="stat-n">3+</span>
+                    <div class="stat-l">Años de experiencia</div>
+                </div>
+                <div class="stat fade">
+                    <span class="stat-n">∞</span>
+                    <div class="stat-l">Ganas de aprender</div>
+                </div>
+                <div class="stat fade">
+                    <span class="stat-n">100%</span>
+                    <div class="stat-l">Compromiso</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+    <div class="section-wrap">
+        <p class="section-tag">// 02. proyectos</p>
+        <h2 class="section-title">Lo que he construido</h2>
+        <div class="projects-grid">
+
+            <div class="card fade">
+                <span class="card-icon">🤖</span>
+                <h3 class="card-title">Automatización de Reportes</h3>
+                <p class="card-desc">
+                    Sistema de generación automática de reportes en PDF con consolidación de datos
+                    de múltiples fuentes. Redujo el tiempo de generación de 4 horas a 5 minutos.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">PDF</span>
+                    <span class="tag">Automatización</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade">
+                <span class="card-icon">📊</span>
+                <h3 class="card-title">Análisis de Datos Educativos</h3>
+                <p class="card-desc">
+                    Herramienta de consolidación y análisis de bases de datos SIMAT con generación
+                    automática de informes estadísticos por colegios y quincenas.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Excel</span>
+                    <span class="tag">Data Analysis</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade">
+                <span class="card-icon">⚙️</span>
+                <h3 class="card-title">Backend API REST</h3>
+                <p class="card-desc">
+                    Desarrollo de API RESTful con autenticación, manejo de base de datos y
+                    documentación completa. Arquitectura limpia y escalable para aplicaciones web.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">REST API</span>
+                    <span class="tag">Backend</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade">
+                <span class="card-icon">🎓</span>
+                <h3 class="card-title">Proyecto de Tesis</h3>
+                <p class="card-desc">
+                    Investigación y desarrollo tecnológico como proyecto de grado universitario.
+                    Integra análisis de datos, modelado y soluciones de ingeniería aplicada.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Research</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">ML</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade">
+                <span class="card-icon">💰</span>
+                <h3 class="card-title">App de Finanzas</h3>
+                <p class="card-desc">
+                    Aplicación de gestión financiera personal con seguimiento de gastos, metas de
+                    ahorro y visualización de flujo de efectivo. Diseñada para hábitos saludables.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">App</span>
+                    <span class="tag">Finanzas</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade">
+                <span class="card-icon">📡</span>
+                <h3 class="card-title">Redes & Infraestructura</h3>
+                <p class="card-desc">
+                    Diseño y simulación de topologías de red con Cisco Packet Tracer. Configuración
+                    de routers, switches y protocolos de enrutamiento para entornos empresariales.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Cisco</span>
+                    <span class="tag">Redes</span>
+                    <span class="tag">Infraestructura</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver proyecto</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+    <div class="section-wrap">
+        <p class="section-tag">// 03. contacto</p>
+        <h2 class="section-title">Hablemos</h2>
+        <div class="contact-inner">
+            <p>
+                ¿Tienes un proyecto, una idea o simplemente quieres conectar?
+                Estoy abierto a nuevas oportunidades y colaboraciones.
+                No dudes en escribirme — respondo rápido.
+            </p>
+            <div class="contact-links">
+
+                <a href="mailto:disaro1999@gmail.com" class="contact-btn">
+                    <!-- Email icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                    Email
+                </a>
+
+                <a href="https://github.com/dylancobos" class="contact-btn" target="_blank" rel="noopener">
+                    <!-- GitHub icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                    GitHub
+                </a>
+
+                <a href="https://linkedin.com/in/dylancobos" class="contact-btn" target="_blank" rel="noopener">
+                    <!-- LinkedIn icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <!-- REEMPLAZA el número con tu número real de WhatsApp: wa.me/57TUNUMERO -->
+                <a href="https://wa.me/57TUNUMERO" class="contact-btn" target="_blank" rel="noopener">
+                    <!-- WhatsApp icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <p>Diseñado & construido por <span>Dylan Cobos</span></p>
+    <p>© 2026 · <span>manosjd.com</span> · Todos los derechos reservados</p>
+</footer>
+
+<script>
+    /* ── Typing animation ── */
+    const roles = [
+        "Ingeniero & Data Analyst",
+        "Python Developer",
+        "Problem Solver",
+        "Data Enthusiast",
+        "Automatizador de procesos",
+    ];
+    let ri = 0, ci = 0, del = false;
+    const el = document.getElementById("typing");
+    function type() {
+        const w = roles[ri];
+        el.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci);
+        if (!del && ci === w.length) { del = true; setTimeout(type, 2200); return; }
+        if (del && ci === 0)         { del = false; ri = (ri + 1) % roles.length; }
+        setTimeout(type, del ? 38 : 78);
+    }
+    type();
+
+    /* ── Hamburger ── */
+    const ham = document.getElementById("ham");
+    const mob = document.getElementById("mob");
+    ham.addEventListener("click", () => {
+        ham.classList.toggle("open");
+        mob.classList.toggle("open");
+    });
+    function closeMob() {
+        ham.classList.remove("open");
+        mob.classList.remove("open");
+    }
+
+    /* ── Scroll fade-in ── */
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+
+    /* ── Active nav highlight ── */
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+        navLinks.forEach(a => {
+            a.style.color = a.getAttribute("href") === `#${current}` ? "var(--accent)" : "";
+        });
+    });
+</script>
+
+</body>
+</html>
