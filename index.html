@@ -3,31 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Cobos — Ingeniero & Data Analyst</title>
-    <meta name="description" content="Portafolio profesional de Dylan Cobos, Ingeniero & Data Analyst. Desarrollo de software, automatización y análisis de datos.">
-    <meta property="og:title" content="Dylan Cobos — Ingeniero & Data Analyst">
-    <meta property="og:description" content="Portafolio profesional: desarrollo, automatización y datos.">
+    <title>Dylan Cobos — Ingeniero de Software & Data Analyst</title>
+    <meta name="description" content="Ingeniero de Software & Data Analyst. Construyo automatizaciones, APIs y análisis de datos que ahorran horas de trabajo y generan resultados medibles.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dylan Cobos — Ingeniero de Software & Data Analyst">
+    <meta property="og:description" content="Convierto problemas reales en software que ahorra tiempo y dinero. Python · JavaScript · Datos.">
     <meta property="og:url" content="https://manosjd.com">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%2300ff88' font-family='monospace'%3E%26gt;_%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured data: Google indexa esto como perfil profesional -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dylan Cobos",
+      "url": "https://manosjd.com",
+      "email": "mailto:dylanjc1290@gmail.com",
+      "jobTitle": "Software Engineer & Data Analyst",
+      "knowsAbout": ["Python", "JavaScript", "SQL", "Data Analysis", "Machine Learning", "Backend Development", "Process Automation"],
+      "sameAs": [
+        "https://github.com/dylancobos",
+        "https://linkedin.com/in/dylancobos"
+      ]
+    }
+    </script>
+
     <style>
-        /* ── Variables ── */
+        /* ════════ Variables ════════ */
         :root {
             --bg:           #0a0a0a;
-            --bg-card:      #111111;
-            --bg-card-h:    #161616;
+            --bg-soft:      #0e0e0e;
+            --bg-card:      #121212;
+            --bg-card-h:    #181818;
             --accent:       #00ff88;
+            --accent-dark:  #00cc6e;
             --accent-dim:   rgba(0,255,136,.08);
             --accent-glow:  rgba(0,255,136,.25);
-            --text:         #e8e8e8;
-            --text-dim:     #777777;
+            --text:         #ededed;
+            --text-dim:     #8a8a8a;
+            --text-faint:   #5a5a5a;
             --border:       rgba(255,255,255,.07);
+            --border-h:     rgba(0,255,136,.28);
             --mono:         'JetBrains Mono', monospace;
             --sans:         'Inter', sans-serif;
-            --radius:       14px;
+            --display:      'Space Grotesk', sans-serif;
+            --radius:       16px;
         }
 
-        /* ── Reset ── */
+        /* ════════ Reset ════════ */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
@@ -37,11 +64,24 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        ::-webkit-scrollbar { width: 5px; }
+        ::selection { background: var(--accent); color: #000; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* ── Nav ── */
+        /* ════════ Scroll progress ════════ */
+        #progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent), #00ccff);
+            z-index: 300;
+            transition: width .1s linear;
+        }
+
+        /* ════════ Nav ════════ */
         nav {
             position: fixed;
             inset: 0 0 auto;
@@ -49,30 +89,55 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.1rem 2.5rem;
-            background: rgba(10,10,10,.82);
+            padding: 1rem 2.5rem;
+            background: rgba(10,10,10,.8);
             backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             border-bottom: 1px solid var(--border);
         }
         .nav-logo {
             font-family: var(--mono);
             color: var(--accent);
-            font-size: 1rem;
+            font-size: .95rem;
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -.02em;
         }
-        .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+        .nav-right { display: flex; align-items: center; gap: 1.8rem; }
+        .nav-links { display: flex; gap: 1.8rem; list-style: none; }
         .nav-links a {
             color: var(--text-dim);
             text-decoration: none;
-            font-size: .88rem;
+            font-size: .86rem;
             letter-spacing: .02em;
             transition: color .2s;
         }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .lang-toggle {
+            font-family: var(--mono);
+            font-size: .72rem;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: .32rem .7rem;
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .06em;
+        }
+        .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .nav-cta {
+            font-size: .82rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: #000 !important;
+            padding: .45rem 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all .2s;
+        }
+        .nav-cta:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
-        /* hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -93,11 +158,10 @@
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* mobile menu */
         .mob-menu {
             display: none;
             position: fixed;
-            top: 62px; left: 0; right: 0;
+            top: 58px; left: 0; right: 0;
             z-index: 199;
             background: rgba(10,10,10,.97);
             backdrop-filter: blur(18px);
@@ -117,12 +181,8 @@
         .mob-menu a:last-child { border-bottom: none; }
         .mob-menu a:hover { color: var(--accent); }
 
-        /* ── Section base ── */
-        .section-wrap {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
-        }
+        /* ════════ Section base ════════ */
+        .section-wrap { max-width: 1120px; margin: 0 auto; padding: 6.5rem 2rem; }
         .section-tag {
             font-family: var(--mono);
             font-size: .75rem;
@@ -130,20 +190,28 @@
             letter-spacing: .15em;
             text-transform: uppercase;
             margin-bottom: .6rem;
-            opacity: .8;
+            opacity: .85;
         }
         .section-title {
-            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            font-family: var(--display);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: .6rem;
+            letter-spacing: -.02em;
+        }
+        .section-sub {
+            color: var(--text-dim);
+            font-size: 1rem;
+            max-width: 560px;
+            margin-bottom: 2.5rem;
         }
 
-        /* ── HERO ── */
+        /* ════════ HERO ════════ */
         #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 80px 2rem 0;
+            padding: 110px 2rem 60px;
             position: relative;
             overflow: hidden;
         }
@@ -151,20 +219,30 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(0,255,136,.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,255,136,.025) 1px, transparent 1px);
+                linear-gradient(rgba(0,255,136,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,.03) 1px, transparent 1px);
             background-size: 48px 48px;
-            mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, #000 20%, transparent 80%);
+            mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, #000 10%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, #000 10%, transparent 75%);
             pointer-events: none;
         }
         .hero-glow {
             position: absolute;
-            width: 600px; height: 600px;
-            top: -200px; right: -200px;
-            background: radial-gradient(circle, rgba(0,255,136,.06) 0%, transparent 70%);
+            width: 700px; height: 700px;
+            top: -250px; right: -200px;
+            background: radial-gradient(circle, rgba(0,255,136,.07) 0%, transparent 70%);
             pointer-events: none;
         }
-        .hero-content { position: relative; max-width: 700px; }
+        .hero-grid {
+            position: relative;
+            max-width: 1120px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 4rem;
+            align-items: center;
+        }
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -174,7 +252,7 @@
             color: var(--accent);
             font-family: var(--mono);
             font-size: .72rem;
-            padding: .3rem .9rem;
+            padding: .32rem .95rem;
             border-radius: 999px;
             margin-bottom: 1.6rem;
             letter-spacing: .05em;
@@ -183,39 +261,39 @@
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
         h1.hero-name {
-            font-size: clamp(2.8rem, 9vw, 5.5rem);
+            font-family: var(--display);
+            font-size: clamp(2.4rem, 6.5vw, 4.2rem);
             font-weight: 700;
-            line-height: 1.05;
-            margin-bottom: 1rem;
+            line-height: 1.06;
+            letter-spacing: -.03em;
+            margin-bottom: 1.1rem;
         }
-        h1.hero-name em {
-            font-style: normal;
-            color: var(--accent);
-        }
+        h1.hero-name em { font-style: normal; color: var(--accent); }
         .hero-role {
             font-family: var(--mono);
-            font-size: clamp(.95rem, 2.5vw, 1.25rem);
+            font-size: clamp(.9rem, 2.2vw, 1.1rem);
             color: var(--text-dim);
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.3rem;
             min-height: 1.8em;
         }
         .cursor { color: var(--accent); animation: blink 1s step-end infinite; }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
         .hero-desc {
             color: var(--text-dim);
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             line-height: 1.75;
-            max-width: 520px;
-            margin-bottom: 2.4rem;
+            max-width: 500px;
+            margin-bottom: 2.2rem;
         }
-        .hero-ctas { display: flex; gap: .9rem; flex-wrap: wrap; }
+        .hero-desc strong { color: var(--text); font-weight: 600; }
+        .hero-ctas { display: flex; gap: .9rem; flex-wrap: wrap; margin-bottom: 2.6rem; }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: .5rem;
-            padding: .75rem 1.6rem;
-            border-radius: 9px;
+            padding: .78rem 1.6rem;
+            border-radius: 10px;
             font-size: .92rem;
             font-weight: 600;
             text-decoration: none;
@@ -225,55 +303,97 @@
         }
         .btn-primary { background: var(--accent); color: #000; }
         .btn-primary:hover {
-            background: #00e07a;
+            background: var(--accent-dark);
             transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(0,255,136,.35);
+            box-shadow: 0 0 28px rgba(0,255,136,.35);
         }
         .btn-ghost {
             background: transparent;
             color: var(--text);
             border: 1px solid var(--border);
         }
-        .btn-ghost:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
+        .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
         .btn-cv {
             background: transparent;
             color: var(--accent);
             border: 1px solid var(--accent-glow);
         }
-        .btn-cv:hover {
-            background: var(--accent-dim);
-            transform: translateY(-2px);
-        }
+        .btn-cv:hover { background: var(--accent-dim); transform: translateY(-2px); }
 
-        .hero-scroll-hint {
-            margin-top: 5rem;
+        .hero-proof {
+            display: flex;
+            gap: 2.2rem;
+            flex-wrap: wrap;
+        }
+        .proof-item { display: flex; flex-direction: column; }
+        .proof-n {
+            font-family: var(--mono);
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+        .proof-l { font-size: .76rem; color: var(--text-faint); }
+
+        /* ── Terminal ── */
+        .terminal {
+            background: #0c0c0c;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(0,255,136,.04);
+            font-family: var(--mono);
+            font-size: .8rem;
+        }
+        .term-bar {
             display: flex;
             align-items: center;
-            gap: .8rem;
-            color: var(--text-dim);
+            gap: .45rem;
+            padding: .7rem 1rem;
+            background: #141414;
+            border-bottom: 1px solid var(--border);
+        }
+        .term-dot { width: 11px; height: 11px; border-radius: 50%; }
+        .term-dot:nth-child(1) { background: #ff5f57; }
+        .term-dot:nth-child(2) { background: #febc2e; }
+        .term-dot:nth-child(3) { background: #28c840; }
+        .term-bar-title {
+            margin-left: auto; margin-right: auto;
+            color: var(--text-faint);
+            font-size: .7rem;
+        }
+        .term-body {
+            padding: 1.1rem 1.2rem;
+            height: 330px;
+            overflow-y: auto;
+            line-height: 1.75;
+        }
+        .term-body::-webkit-scrollbar { width: 4px; }
+        .term-line { white-space: pre-wrap; word-break: break-word; }
+        .t-prompt { color: var(--accent); }
+        .t-cmd { color: var(--text); }
+        .t-out { color: var(--text-dim); }
+        .t-key { color: #00ccff; }
+        .t-hint { color: var(--text-faint); font-style: italic; }
+        .term-input-row { display: flex; align-items: baseline; gap: .5rem; }
+        .term-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
             font-family: var(--mono);
-            font-size: .72rem;
-            letter-spacing: .1em;
+            font-size: .8rem;
+            flex: 1;
+            caret-color: var(--accent);
         }
-        .scroll-bar {
-            width: 36px; height: 1px;
-            background: var(--accent);
-            animation: shrink 2s ease-in-out infinite;
-        }
-        @keyframes shrink { 0%,100%{width:36px;opacity:1} 50%{width:16px;opacity:.3} }
 
-        /* ── ABOUT ── */
-        #about { border-top: 1px solid var(--border); }
+        /* ════════ ABOUT ════════ */
+        #about { border-top: 1px solid var(--border); background: var(--bg-soft); }
         .about-grid {
             display: grid;
             grid-template-columns: 1.1fr .9fr;
             gap: 4rem;
             align-items: start;
-            margin-top: 2.5rem;
         }
         .about-text p {
             color: var(--text-dim);
@@ -282,43 +402,40 @@
             font-size: .97rem;
         }
         .about-text p strong { color: var(--accent); font-weight: 600; }
-        .skills-wrap {
-            margin-top: 1.8rem;
-        }
-        .skills-label {
+
+        .skill-groups { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.6rem; }
+        .skill-group-label {
             font-family: var(--mono);
-            font-size: .72rem;
-            color: var(--text-dim);
+            font-size: .7rem;
+            color: var(--text-faint);
             letter-spacing: .12em;
             text-transform: uppercase;
-            margin-bottom: .8rem;
+            margin-bottom: .55rem;
         }
-        .skills-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: .45rem; }
         .skill {
             font-family: var(--mono);
             font-size: .72rem;
             color: var(--accent);
             background: var(--accent-dim);
-            border: 1px solid var(--accent-glow);
+            border: 1px solid rgba(0,255,136,.18);
             padding: .28rem .75rem;
-            border-radius: 6px;
+            border-radius: 7px;
             letter-spacing: .03em;
+            transition: all .2s;
         }
+        .skill:hover { border-color: var(--accent); transform: translateY(-1px); }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: .8rem;
-        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
         .stat {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1.4rem;
+            padding: 1.5rem 1.2rem;
             text-align: center;
-            transition: border-color .25s;
+            transition: border-color .25s, transform .25s;
         }
-        .stat:hover { border-color: var(--accent-glow); }
+        .stat:hover { border-color: var(--border-h); transform: translateY(-3px); }
         .stat-n {
             display: block;
             font-family: var(--mono);
@@ -326,17 +443,96 @@
             font-weight: 700;
             color: var(--accent);
             line-height: 1;
-            margin-bottom: .4rem;
+            margin-bottom: .45rem;
         }
         .stat-l { font-size: .78rem; color: var(--text-dim); }
 
-        /* ── PROJECTS ── */
+        /* ════════ FEATURED PROJECTS ════════ */
         #projects { border-top: 1px solid var(--border); }
+        .featured {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+            margin-bottom: 3.5rem;
+        }
+        .case {
+            background: linear-gradient(160deg, var(--bg-card) 0%, #0d0d0d 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform .3s, border-color .3s, box-shadow .3s;
+        }
+        .case::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent 60%);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .case:hover { transform: translateY(-5px); border-color: var(--border-h); box-shadow: 0 28px 60px rgba(0,0,0,.5); }
+        .case:hover::before { opacity: 1; }
+        .case-label {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--accent);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: .9rem;
+            display: block;
+        }
+        .case-title { font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin-bottom: 1.1rem; letter-spacing: -.01em; }
+        .case-row { display: flex; gap: .7rem; margin-bottom: .8rem; align-items: baseline; }
+        .case-k {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            min-width: 80px;
+            flex-shrink: 0;
+        }
+        .case-v { color: var(--text-dim); font-size: .88rem; line-height: 1.6; }
+        .case-impact {
+            margin: 1.2rem 0 1.3rem;
+            padding: .9rem 1.1rem;
+            background: var(--accent-dim);
+            border-left: 2px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+        }
+        .case-impact span {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-size: .95rem;
+            font-weight: 700;
+        }
+        .case-impact p { color: var(--text-dim); font-size: .8rem; margin-top: .15rem; }
+        .case-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+        /* ── Project grid ── */
+        .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.8rem; }
+        .filter-btn {
+            font-family: var(--mono);
+            font-size: .74rem;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: .38rem 1rem;
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .03em;
+        }
+        .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.3rem;
-            margin-top: 2.5rem;
         }
         .card {
             background: var(--bg-card);
@@ -345,8 +541,11 @@
             padding: 1.7rem;
             position: relative;
             overflow: hidden;
-            transition: transform .3s, border-color .3s, background .3s, box-shadow .3s;
+            transition: transform .3s, border-color .3s, background .3s, box-shadow .3s, opacity .3s;
+            display: flex;
+            flex-direction: column;
         }
+        .card.hidden { display: none; }
         .card::after {
             content: "";
             position: absolute;
@@ -358,26 +557,27 @@
         }
         .card:hover {
             transform: translateY(-5px);
-            border-color: rgba(0,255,136,.2);
+            border-color: var(--border-h);
             background: var(--bg-card-h);
             box-shadow: 0 24px 48px rgba(0,0,0,.5);
         }
         .card:hover::after { opacity: 1; }
-        .card-icon { font-size: 1.8rem; margin-bottom: .9rem; display: block; }
-        .card-title { font-size: 1.08rem; font-weight: 600; margin-bottom: .55rem; }
+        .card-icon { font-size: 1.7rem; margin-bottom: .9rem; display: block; }
+        .card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: .55rem; }
         .card-desc {
             color: var(--text-dim);
-            font-size: .87rem;
+            font-size: .86rem;
             line-height: 1.65;
             margin-bottom: 1.1rem;
+            flex: 1;
         }
         .card-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.1rem; }
         .tag {
             font-family: var(--mono);
-            font-size: .68rem;
+            font-size: .67rem;
             color: var(--text-dim);
             background: rgba(255,255,255,.05);
-            border-radius: 4px;
+            border-radius: 5px;
             padding: .2rem .55rem;
         }
         .card-links { display: flex; gap: .9rem; }
@@ -394,25 +594,83 @@
         }
         .card-link:hover { opacity: 1; }
 
-        /* ── CONTACT ── */
-        #contact { border-top: 1px solid var(--border); }
-        .contact-inner {
-            max-width: 580px;
-            margin: 2rem auto 0;
-            text-align: center;
+        /* ════════ PROCESS ════════ */
+        #process { border-top: 1px solid var(--border); background: var(--bg-soft); }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
         }
-        .contact-inner p {
+        .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.7rem 1.4rem;
+            transition: border-color .25s, transform .25s;
+        }
+        .step:hover { border-color: var(--border-h); transform: translateY(-4px); }
+        .step-n {
+            font-family: var(--mono);
+            font-size: .8rem;
+            color: var(--accent);
+            font-weight: 700;
+            display: block;
+            margin-bottom: .8rem;
+        }
+        .step-t { font-weight: 600; font-size: .98rem; margin-bottom: .5rem; }
+        .step-d { color: var(--text-dim); font-size: .83rem; line-height: 1.65; }
+
+        /* ════════ CONTACT ════════ */
+        #contact { border-top: 1px solid var(--border); position: relative; overflow: hidden; }
+        .contact-glow {
+            position: absolute;
+            width: 600px; height: 600px;
+            bottom: -350px; left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(0,255,136,.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; position: relative; }
+        .contact-title {
+            font-family: var(--display);
+            font-size: clamp(2rem, 5.5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -.02em;
+            margin-bottom: 1.1rem;
+        }
+        .contact-title em { font-style: normal; color: var(--accent); }
+        .contact-inner > p {
             color: var(--text-dim);
             font-size: 1rem;
             line-height: 1.75;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.2rem;
         }
-        .contact-links {
-            display: flex;
-            justify-content: center;
+        .email-box {
+            display: inline-flex;
+            align-items: center;
             gap: .8rem;
-            flex-wrap: wrap;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: .8rem 1rem .8rem 1.4rem;
+            margin-bottom: 2.4rem;
+            font-family: var(--mono);
+            font-size: .92rem;
         }
+        .email-box span { color: var(--text); }
+        .copy-btn {
+            font-family: var(--mono);
+            font-size: .72rem;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border: 1px solid var(--accent-glow);
+            border-radius: 8px;
+            padding: .4rem .9rem;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .copy-btn:hover { background: var(--accent); color: #000; }
+        .contact-links { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; }
         .contact-btn {
             display: flex;
             align-items: center;
@@ -434,370 +692,766 @@
             background: var(--accent-dim);
         }
 
-        /* ── FOOTER ── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-        }
-        footer p {
-            font-family: var(--mono);
-            font-size: .72rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-        }
+        /* ════════ FOOTER ════════ */
+        footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+        footer p { font-family: var(--mono); font-size: .72rem; color: var(--text-faint); line-height: 1.8; }
         footer span { color: var(--accent); }
 
-        /* ── FADE-IN ── */
+        /* ════════ Animations ════════ */
         .fade {
             opacity: 0;
-            transform: translateY(18px);
-            transition: opacity .55s ease, transform .55s ease;
+            transform: translateY(20px);
+            transition: opacity .6s ease, transform .6s ease;
         }
         .fade.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+        }
 
-        /* ── RESPONSIVE ── */
+        /* ════════ Responsive ════════ */
+        @media (max-width: 960px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .terminal { max-width: 560px; }
+            .process-grid { grid-template-columns: 1fr 1fr; }
+            .featured { grid-template-columns: 1fr; }
+        }
         @media (max-width: 800px) {
-            .nav-links { display: none; }
+            .nav-links, .nav-cta { display: none; }
             .hamburger { display: flex; }
             nav { padding: 1rem 1.5rem; }
             .section-wrap { padding: 4.5rem 1.3rem; }
             .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
-        @media (max-width: 500px) {
+        @media (max-width: 520px) {
             .projects-grid { grid-template-columns: 1fr; }
             .hero-ctas { flex-direction: column; }
             .btn { justify-content: center; }
-            .hero-scroll-hint { display: none; }
+            .process-grid { grid-template-columns: 1fr; }
+            .hero-proof { gap: 1.4rem; }
+            .email-box { flex-direction: column; padding: 1rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<div id="progress"></div>
+
+<!-- ════════ NAV ════════ -->
 <nav>
     <a href="#hero" class="nav-logo">&lt;dylan.cobos /&gt;</a>
-    <ul class="nav-links">
-        <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#projects">Proyectos</a></li>
-        <li><a href="#contact">Contacto</a></li>
-    </ul>
-    <button class="hamburger" id="ham" aria-label="Menú">
-        <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+            <li><a href="#process" data-i18n="nav_process">Cómo trabajo</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+        </ul>
+        <button class="lang-toggle" id="langBtn" aria-label="Switch language">EN</button>
+        <a href="#contact" class="nav-cta" data-i18n="nav_cta">Hablemos →</a>
+        <button class="hamburger" id="ham" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 </nav>
 
 <div class="mob-menu" id="mob">
-    <a href="#about"    onclick="closeMob()">Sobre mí</a>
-    <a href="#projects" onclick="closeMob()">Proyectos</a>
-    <a href="#contact"  onclick="closeMob()">Contacto</a>
+    <a href="#about" onclick="closeMob()" data-i18n="nav_about">Sobre mí</a>
+    <a href="#projects" onclick="closeMob()" data-i18n="nav_projects">Proyectos</a>
+    <a href="#process" onclick="closeMob()" data-i18n="nav_process">Cómo trabajo</a>
+    <a href="#contact" onclick="closeMob()" data-i18n="nav_contact">Contacto</a>
 </div>
 
-<!-- ── HERO ── -->
+<!-- ════════ HERO ════════ -->
 <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-glow"></div>
-    <div class="hero-content">
-        <div class="hero-badge">Disponible para proyectos</div>
-        <h1 class="hero-name">Hola, soy<br><em>Dylan Cobos</em></h1>
-        <p class="hero-role"><span id="typing"></span><span class="cursor">|</span></p>
-        <p class="hero-desc">
-            Ingeniero apasionado por convertir datos en decisiones y código en soluciones reales.
-            Construyo sistemas, automatizo procesos y analizo información para generar impacto.
-        </p>
-        <div class="hero-ctas">
-            <a href="#projects" class="btn btn-primary">Ver proyectos ↓</a>
-            <a href="cv.pdf" class="btn btn-cv" download>Descargar CV ↗</a>
-            <a href="#contact" class="btn btn-ghost">Contactarme</a>
+    <div class="hero-grid">
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="badge">Disponible para nuevos proyectos</div>
+            <h1 class="hero-name"><span data-i18n="hero_h1a">Construyo software que</span><br><em data-i18n="hero_h1b">ahorra tiempo real.</em></h1>
+            <p class="hero-role"><span id="typing"></span><span class="cursor">|</span></p>
+            <p class="hero-desc" data-i18n-html="hero_desc">
+                Soy <strong>Dylan Cobos</strong>, Ingeniero de Software & Data Analyst.
+                Automatizo procesos, construyo APIs y convierto datos en decisiones —
+                con resultados medibles, no promesas.
+            </p>
+            <div class="hero-ctas">
+                <a href="#projects" class="btn btn-primary" data-i18n="cta_projects">Ver proyectos ↓</a>
+                <a href="cv.pdf" class="btn btn-cv" download data-i18n="cta_cv">Descargar CV ↗</a>
+                <a href="#contact" class="btn btn-ghost" data-i18n="cta_contact">Contactarme</a>
+            </div>
+            <div class="hero-proof">
+                <div class="proof-item">
+                    <span class="proof-n">98%</span>
+                    <span class="proof-l" data-i18n="proof_1">menos tiempo en reportes</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-n">10+</span>
+                    <span class="proof-l" data-i18n="proof_2">proyectos entregados</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-n">3+</span>
+                    <span class="proof-l" data-i18n="proof_3">años de experiencia</span>
+                </div>
+            </div>
         </div>
-        <div class="hero-scroll-hint">
-            <div class="scroll-bar"></div>
-            scroll para explorar
+
+        <!-- Terminal interactiva -->
+        <div class="terminal" id="terminal">
+            <div class="term-bar">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                <span class="term-bar-title">dylan@manosjd — zsh</span>
+            </div>
+            <div class="term-body" id="termBody">
+                <div class="term-line"><span class="t-prompt">➜ ~</span> <span class="t-cmd">whoami</span></div>
+                <div class="term-line t-out" data-i18n="term_whoami">Dylan Cobos — Ingeniero de Software & Data Analyst</div>
+                <div class="term-line"><span class="t-prompt">➜ ~</span> <span class="t-cmd">cat stack.txt</span></div>
+                <div class="term-line t-out">Python · JavaScript · SQL · Node.js · ML · Excel/VBA</div>
+                <div class="term-line t-hint" data-i18n="term_hint">// escribe "help" y presiona Enter ↓</div>
+                <div class="term-input-row">
+                    <span class="t-prompt">➜ ~</span>
+                    <input type="text" class="term-input" id="termInput" autocomplete="off" spellcheck="false" aria-label="Terminal">
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ── ABOUT ── -->
+<!-- ════════ ABOUT ════════ -->
 <section id="about">
     <div class="section-wrap">
-        <p class="section-tag">// 01. sobre mí</p>
-        <h2 class="section-title">¿Quién soy?</h2>
+        <p class="section-tag" data-i18n="about_tag">// 01. sobre mí</p>
+        <h2 class="section-title" data-i18n="about_title">¿Quién soy?</h2>
         <div class="about-grid">
             <div class="about-text">
-                <p>
-                    Soy <strong>Ingeniero & Data Analyst</strong> con experiencia en desarrollo de software,
-                    automatización de procesos y análisis de datos. Me apasiona resolver problemas
-                    complejos con soluciones elegantes y eficientes.
+                <p data-i18n-html="about_p1">
+                    Soy <strong>Ingeniero de Software & Data Analyst</strong>. Mi especialidad:
+                    encontrar el proceso manual que le cuesta horas a un equipo y reemplazarlo
+                    con software que lo hace en minutos.
                 </p>
-                <p>
-                    Trabajo con <strong>Python</strong>, <strong>JavaScript</strong> y herramientas de datos
-                    para construir sistemas que realmente hacen la diferencia — desde automatizaciones que
-                    ahorran horas de trabajo hasta dashboards que revelan insights ocultos.
+                <p data-i18n-html="about_p2">
+                    Trabajo con <strong>Python</strong>, <strong>JavaScript</strong> y herramientas de datos.
+                    He construido desde pipelines de reportes automáticos que redujeron 4 horas de trabajo
+                    a 5 minutos, hasta APIs backend y modelos de machine learning aplicados.
                 </p>
-                <p>
-                    Actualmente enfocado en proyectos que mezclan ingeniería con inteligencia de datos.
-                    Siempre aprendiendo, siempre construyendo.
+                <p data-i18n-html="about_p3">
+                    No me contratan por escribir código — me contratan por <strong>resolver problemas</strong>.
+                    El código es solo la herramienta.
                 </p>
-                <div class="skills-wrap">
-                    <p class="skills-label">Stack tecnológico</p>
-                    <div class="skills-list">
-                        <span class="skill">Python</span>
-                        <span class="skill">JavaScript</span>
-                        <span class="skill">SQL</span>
-                        <span class="skill">Data Analysis</span>
-                        <span class="skill">Automatización</span>
-                        <span class="skill">Excel / VBA</span>
-                        <span class="skill">Google Apps Script</span>
-                        <span class="skill">Machine Learning</span>
-                        <span class="skill">Backend Dev</span>
-                        <span class="skill">Cisco / Redes</span>
+                <div class="skill-groups">
+                    <div>
+                        <p class="skill-group-label" data-i18n="sk_lang">Lenguajes & Datos</p>
+                        <div class="skills-list">
+                            <span class="skill">Python</span>
+                            <span class="skill">JavaScript</span>
+                            <span class="skill">SQL</span>
+                            <span class="skill">Pandas</span>
+                            <span class="skill">Excel / VBA</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-group-label" data-i18n="sk_eng">Ingeniería</p>
+                        <div class="skills-list">
+                            <span class="skill">Node.js</span>
+                            <span class="skill">REST APIs</span>
+                            <span class="skill">Google Apps Script</span>
+                            <span class="skill">Git</span>
+                            <span class="skill">Cisco / Redes</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-group-label" data-i18n="sk_data">Análisis & ML</p>
+                        <div class="skills-list">
+                            <span class="skill">Machine Learning</span>
+                            <span class="skill">Data Analysis</span>
+                            <span class="skill" data-i18n="sk_auto">Automatización</span>
+                            <span class="skill" data-i18n="sk_viz">Visualización</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="stats-grid">
                 <div class="stat fade">
-                    <span class="stat-n">10+</span>
-                    <div class="stat-l">Proyectos completados</div>
+                    <span class="stat-n" data-count="10">0</span><span class="stat-n" style="display:inline">+</span>
+                    <div class="stat-l" data-i18n="stat_1">Proyectos completados</div>
                 </div>
                 <div class="stat fade">
-                    <span class="stat-n">3+</span>
-                    <div class="stat-l">Años de experiencia</div>
+                    <span class="stat-n" data-count="3">0</span><span class="stat-n" style="display:inline">+</span>
+                    <div class="stat-l" data-i18n="stat_2">Años de experiencia</div>
+                </div>
+                <div class="stat fade">
+                    <span class="stat-n" data-count="98">0</span><span class="stat-n" style="display:inline">%</span>
+                    <div class="stat-l" data-i18n="stat_3">Reducción de tiempo lograda</div>
                 </div>
                 <div class="stat fade">
                     <span class="stat-n">∞</span>
-                    <div class="stat-l">Ganas de aprender</div>
-                </div>
-                <div class="stat fade">
-                    <span class="stat-n">100%</span>
-                    <div class="stat-l">Compromiso</div>
+                    <div class="stat-l" data-i18n="stat_4">Ganas de aprender</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── PROJECTS ── -->
+<!-- ════════ PROJECTS ════════ -->
 <section id="projects">
     <div class="section-wrap">
-        <p class="section-tag">// 02. proyectos</p>
-        <h2 class="section-title">Lo que he construido</h2>
-        <div class="projects-grid">
+        <p class="section-tag" data-i18n="proj_tag">// 02. proyectos</p>
+        <h2 class="section-title" data-i18n="proj_title">Resultados, no solo código</h2>
+        <p class="section-sub" data-i18n="proj_sub">Cada proyecto resolvió un problema real. Estos son los dos con mayor impacto:</p>
 
-            <div class="card fade">
-                <span class="card-icon">🤖</span>
-                <h3 class="card-title">Automatización de Reportes</h3>
-                <p class="card-desc">
-                    Sistema de generación automática de reportes en PDF con consolidación de datos
-                    de múltiples fuentes. Redujo el tiempo de generación de 4 horas a 5 minutos.
-                </p>
-                <div class="card-tags">
+        <!-- Case studies destacados -->
+        <div class="featured">
+            <article class="case fade">
+                <span class="case-label" data-i18n="case_label">★ Caso destacado</span>
+                <h3 class="case-title" data-i18n="case1_title">Automatización de Reportes Educativos</h3>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_problem">Problema</span>
+                    <span class="case-v" data-i18n="case1_problem">Cada quincena, generar los reportes en PDF de múltiples colegios tomaba 4 horas de trabajo manual y era propenso a errores de transcripción.</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_solution">Solución</span>
+                    <span class="case-v" data-i18n="case1_solution">Pipeline en Python que consolida datos de múltiples fuentes, valida inconsistencias y genera todos los PDFs automáticamente con un solo comando.</span>
+                </div>
+                <div class="case-impact">
+                    <span data-i18n="case1_metric">4 horas → 5 minutos</span>
+                    <p data-i18n="case1_impact">−98% de tiempo y cero errores de transcripción desde su implementación.</p>
+                </div>
+                <div class="case-tags">
                     <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
                     <span class="tag">PDF</span>
-                    <span class="tag">Automatización</span>
+                    <span class="tag" data-i18n="tag_auto">Automatización</span>
                 </div>
-                <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
-                </div>
-            </div>
+            </article>
 
-            <div class="card fade">
-                <span class="card-icon">📊</span>
-                <h3 class="card-title">Análisis de Datos Educativos</h3>
-                <p class="card-desc">
-                    Herramienta de consolidación y análisis de bases de datos SIMAT con generación
-                    automática de informes estadísticos por colegios y quincenas.
-                </p>
-                <div class="card-tags">
+            <article class="case fade">
+                <span class="case-label" data-i18n="case_label2">★ Caso destacado</span>
+                <h3 class="case-title" data-i18n="case2_title">Análisis de Base de Datos SIMAT</h3>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_problem2">Problema</span>
+                    <span class="case-v" data-i18n="case2_problem">Las bases SIMAT del sector educativo llegaban fragmentadas y sin formato estándar, haciendo casi imposible el análisis comparativo entre colegios.</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_solution2">Solución</span>
+                    <span class="case-v" data-i18n="case2_solution">Herramienta de consolidación y limpieza que unifica las bases y genera informes estadísticos automáticos por colegio y por quincena.</span>
+                </div>
+                <div class="case-impact">
+                    <span data-i18n="case2_metric">Informes en minutos</span>
+                    <p data-i18n="case2_impact">Análisis comparativos que antes no existían, disponibles para la toma de decisiones.</p>
+                </div>
+                <div class="case-tags">
                     <span class="tag">Python</span>
                     <span class="tag">Excel</span>
                     <span class="tag">Data Analysis</span>
                 </div>
-                <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
-                </div>
-            </div>
+            </article>
+        </div>
 
-            <div class="card fade">
+        <!-- Filtros -->
+        <div class="filters" id="filters">
+            <button class="filter-btn active" data-filter="all" data-i18n="f_all">Todos</button>
+            <button class="filter-btn" data-filter="python">Python</button>
+            <button class="filter-btn" data-filter="js">JavaScript</button>
+            <button class="filter-btn" data-filter="data">Data / ML</button>
+            <button class="filter-btn" data-filter="infra" data-i18n="f_infra">Redes</button>
+        </div>
+
+        <div class="projects-grid">
+            <div class="card fade" data-cat="js">
                 <span class="card-icon">⚙️</span>
                 <h3 class="card-title">Backend API REST</h3>
-                <p class="card-desc">
-                    Desarrollo de API RESTful con autenticación, manejo de base de datos y
-                    documentación completa. Arquitectura limpia y escalable para aplicaciones web.
+                <p class="card-desc" data-i18n="p_api">
+                    API RESTful con autenticación, manejo de base de datos y documentación completa.
+                    Arquitectura limpia y escalable para aplicaciones web.
                 </p>
                 <div class="card-tags">
-                    <span class="tag">Node.js</span>
-                    <span class="tag">REST API</span>
-                    <span class="tag">Backend</span>
+                    <span class="tag">Node.js</span><span class="tag">REST API</span><span class="tag">Backend</span>
                 </div>
                 <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_code">↗ Ver código</a>
                 </div>
             </div>
 
-            <div class="card fade">
-                <span class="card-icon">🎓</span>
-                <h3 class="card-title">Proyecto de Tesis</h3>
-                <p class="card-desc">
-                    Investigación y desarrollo tecnológico como proyecto de grado universitario.
-                    Integra análisis de datos, modelado y soluciones de ingeniería aplicada.
-                </p>
-                <div class="card-tags">
-                    <span class="tag">Research</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">ML</span>
-                </div>
-                <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
-                </div>
-            </div>
-
-            <div class="card fade">
+            <div class="card fade" data-cat="js">
                 <span class="card-icon">💰</span>
-                <h3 class="card-title">App de Finanzas</h3>
-                <p class="card-desc">
-                    Aplicación de gestión financiera personal con seguimiento de gastos, metas de
-                    ahorro y visualización de flujo de efectivo. Diseñada para hábitos saludables.
+                <h3 class="card-title" data-i18n="p_fin_t">App de Finanzas Personales</h3>
+                <p class="card-desc" data-i18n="p_fin">
+                    Aplicación de gestión financiera con seguimiento de gastos, metas de ahorro
+                    y visualización de flujo de efectivo.
                 </p>
                 <div class="card-tags">
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">App</span>
-                    <span class="tag">Finanzas</span>
+                    <span class="tag">JavaScript</span><span class="tag">App</span><span class="tag" data-i18n="tag_fin">Finanzas</span>
                 </div>
                 <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver código</a>
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_code2">↗ Ver código</a>
                 </div>
             </div>
 
-            <div class="card fade">
+            <div class="card fade" data-cat="data python">
+                <span class="card-icon">🎓</span>
+                <h3 class="card-title" data-i18n="p_tesis_t">Proyecto de Tesis — ML aplicado</h3>
+                <p class="card-desc" data-i18n="p_tesis">
+                    Investigación y desarrollo como proyecto de grado: análisis de datos,
+                    modelado predictivo y soluciones de ingeniería aplicada.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Python</span><span class="tag">ML</span><span class="tag">Research</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_code3">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade" data-cat="data python">
+                <span class="card-icon">🤖</span>
+                <h3 class="card-title" data-i18n="p_agente_t">Agente Académico Inteligente</h3>
+                <p class="card-desc" data-i18n="p_agente">
+                    Agente basado en árboles de decisión para la gestión y consulta
+                    de información académica de forma automatizada.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Python</span><span class="tag" data-i18n="tag_agents">Agentes</span><span class="tag" data-i18n="tag_trees">Árboles</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_code4">↗ Ver código</a>
+                </div>
+            </div>
+
+            <div class="card fade" data-cat="infra">
                 <span class="card-icon">📡</span>
-                <h3 class="card-title">Redes & Infraestructura</h3>
-                <p class="card-desc">
-                    Diseño y simulación de topologías de red con Cisco Packet Tracer. Configuración
-                    de routers, switches y protocolos de enrutamiento para entornos empresariales.
+                <h3 class="card-title" data-i18n="p_redes_t">Redes & Infraestructura</h3>
+                <p class="card-desc" data-i18n="p_redes">
+                    Diseño y simulación de topologías de red con Cisco Packet Tracer: routers,
+                    switches y protocolos de enrutamiento para entornos empresariales.
                 </p>
                 <div class="card-tags">
-                    <span class="tag">Cisco</span>
-                    <span class="tag">Redes</span>
-                    <span class="tag">Infraestructura</span>
+                    <span class="tag">Cisco</span><span class="tag" data-i18n="tag_redes">Redes</span><span class="tag" data-i18n="tag_infra">Infraestructura</span>
                 </div>
                 <div class="card-links">
-                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener">↗ Ver proyecto</a>
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_proj">↗ Ver proyecto</a>
                 </div>
             </div>
 
+            <div class="card fade" data-cat="python data">
+                <span class="card-icon">📈</span>
+                <h3 class="card-title" data-i18n="p_apps_t">Automatizaciones con Apps Script</h3>
+                <p class="card-desc" data-i18n="p_apps">
+                    Flujos automáticos sobre Google Workspace: hojas de cálculo que se actualizan solas,
+                    correos programados e integración entre servicios.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Apps Script</span><span class="tag">Google Workspace</span><span class="tag" data-i18n="tag_auto2">Automatización</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/dylancobos" class="card-link" target="_blank" rel="noopener" data-i18n="link_code5">↗ Ver código</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ── CONTACT ── -->
-<section id="contact">
+<!-- ════════ PROCESS ════════ -->
+<section id="process">
     <div class="section-wrap">
-        <p class="section-tag">// 03. contacto</p>
-        <h2 class="section-title">Hablemos</h2>
-        <div class="contact-inner">
-            <p>
-                ¿Tienes un proyecto, una idea o simplemente quieres conectar?
-                Estoy abierto a nuevas oportunidades y colaboraciones.
-                No dudes en escribirme — respondo rápido.
-            </p>
-            <div class="contact-links">
+        <p class="section-tag" data-i18n="proc_tag">// 03. cómo trabajo</p>
+        <h2 class="section-title" data-i18n="proc_title">Mi proceso</h2>
+        <p class="section-sub" data-i18n="proc_sub">El mismo método en cada proyecto, del más pequeño al más grande:</p>
+        <div class="process-grid">
+            <div class="step fade">
+                <span class="step-n">01</span>
+                <h3 class="step-t" data-i18n="step1_t">Entender el problema</h3>
+                <p class="step-d" data-i18n="step1_d">Antes de escribir una línea de código, entiendo qué duele, a quién y cuánto cuesta. El mejor código es el que resuelve el problema correcto.</p>
+            </div>
+            <div class="step fade">
+                <span class="step-n">02</span>
+                <h3 class="step-t" data-i18n="step2_t">Diseñar simple</h3>
+                <p class="step-d" data-i18n="step2_d">La solución más simple que funcione. Sin sobre-ingeniería: arquitecturas claras que cualquiera del equipo pueda mantener.</p>
+            </div>
+            <div class="step fade">
+                <span class="step-n">03</span>
+                <h3 class="step-t" data-i18n="step3_t">Construir e iterar</h3>
+                <p class="step-d" data-i18n="step3_d">Entrego versiones funcionales rápido y las mejoro con feedback real. Comunicación constante, sin sorpresas al final.</p>
+            </div>
+            <div class="step fade">
+                <span class="step-n">04</span>
+                <h3 class="step-t" data-i18n="step4_t">Medir el impacto</h3>
+                <p class="step-d" data-i18n="step4_d">Si no se puede medir, no se hizo. Horas ahorradas, errores eliminados, decisiones habilitadas — los números cuentan la historia.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <a href="mailto:disaro1999@gmail.com" class="contact-btn">
-                    <!-- Email icon -->
+<!-- ════════ CONTACT ════════ -->
+<section id="contact">
+    <div class="contact-glow"></div>
+    <div class="section-wrap">
+        <div class="contact-inner">
+            <p class="section-tag" data-i18n="ct_tag">// 04. contacto</p>
+            <h2 class="contact-title"><span data-i18n="ct_t1">¿Tienes un problema que</span> <em data-i18n="ct_t2">el software puede resolver?</em></h2>
+            <p data-i18n="ct_p">
+                Estoy disponible para nuevos proyectos y oportunidades.
+                Cuéntame qué necesitas y te respondo en menos de 24 horas.
+            </p>
+            <div class="email-box">
+                <span id="emailText">dylanjc1290@gmail.com</span>
+                <button class="copy-btn" id="copyBtn" data-i18n="ct_copy">Copiar</button>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:dylanjc1290@gmail.com" class="contact-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"/>
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
                     Email
                 </a>
-
                 <a href="https://github.com/dylancobos" class="contact-btn" target="_blank" rel="noopener">
-                    <!-- GitHub icon -->
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
                     GitHub
                 </a>
-
                 <a href="https://linkedin.com/in/dylancobos" class="contact-btn" target="_blank" rel="noopener">
-                    <!-- LinkedIn icon -->
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                     LinkedIn
                 </a>
-
                 <!-- REEMPLAZA el número con tu número real de WhatsApp: wa.me/57TUNUMERO -->
                 <a href="https://wa.me/57TUNUMERO" class="contact-btn" target="_blank" rel="noopener">
-                    <!-- WhatsApp icon -->
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
                     WhatsApp
                 </a>
-
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ════════ FOOTER ════════ -->
 <footer>
-    <p>Diseñado & construido por <span>Dylan Cobos</span></p>
-    <p>© 2026 · <span>manosjd.com</span> · Todos los derechos reservados</p>
+    <p data-i18n-html="foot_1">Diseñado & construido por <span>Dylan Cobos</span></p>
+    <p>© 2026 · <span>manosjd.com</span></p>
 </footer>
 
 <script>
-    /* ── Typing animation ── */
-    const roles = [
-        "Ingeniero & Data Analyst",
-        "Python Developer",
-        "Problem Solver",
-        "Data Enthusiast",
-        "Automatizador de procesos",
-    ];
-    let ri = 0, ci = 0, del = false;
-    const el = document.getElementById("typing");
-    function type() {
-        const w = roles[ri];
-        el.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci);
-        if (!del && ci === w.length) { del = true; setTimeout(type, 2200); return; }
-        if (del && ci === 0)         { del = false; ri = (ri + 1) % roles.length; }
-        setTimeout(type, del ? 38 : 78);
+/* ════════════════════════════════════════
+   i18n — Español / English
+   ════════════════════════════════════════ */
+const I18N = {
+    es: {
+        nav_about: "Sobre mí", nav_projects: "Proyectos", nav_process: "Cómo trabajo",
+        nav_contact: "Contacto", nav_cta: "Hablemos →",
+        badge: "Disponible para nuevos proyectos",
+        hero_h1a: "Construyo software que", hero_h1b: "ahorra tiempo real.",
+        hero_desc: 'Soy <strong>Dylan Cobos</strong>, Ingeniero de Software & Data Analyst. Automatizo procesos, construyo APIs y convierto datos en decisiones — con resultados medibles, no promesas.',
+        cta_projects: "Ver proyectos ↓", cta_cv: "Descargar CV ↗", cta_contact: "Contactarme",
+        proof_1: "menos tiempo en reportes", proof_2: "proyectos entregados", proof_3: "años de experiencia",
+        term_whoami: "Dylan Cobos — Ingeniero de Software & Data Analyst",
+        term_hint: '// escribe "help" y presiona Enter ↓',
+        about_tag: "// 01. sobre mí", about_title: "¿Quién soy?",
+        about_p1: 'Soy <strong>Ingeniero de Software & Data Analyst</strong>. Mi especialidad: encontrar el proceso manual que le cuesta horas a un equipo y reemplazarlo con software que lo hace en minutos.',
+        about_p2: 'Trabajo con <strong>Python</strong>, <strong>JavaScript</strong> y herramientas de datos. He construido desde pipelines de reportes automáticos que redujeron 4 horas de trabajo a 5 minutos, hasta APIs backend y modelos de machine learning aplicados.',
+        about_p3: 'No me contratan por escribir código — me contratan por <strong>resolver problemas</strong>. El código es solo la herramienta.',
+        sk_lang: "Lenguajes & Datos", sk_eng: "Ingeniería", sk_data: "Análisis & ML",
+        sk_auto: "Automatización", sk_viz: "Visualización",
+        stat_1: "Proyectos completados", stat_2: "Años de experiencia",
+        stat_3: "Reducción de tiempo lograda", stat_4: "Ganas de aprender",
+        proj_tag: "// 02. proyectos", proj_title: "Resultados, no solo código",
+        proj_sub: "Cada proyecto resolvió un problema real. Estos son los dos con mayor impacto:",
+        case_label: "★ Caso destacado", case_label2: "★ Caso destacado",
+        case1_title: "Automatización de Reportes Educativos",
+        k_problem: "Problema", k_solution: "Solución", k_problem2: "Problema", k_solution2: "Solución",
+        case1_problem: "Cada quincena, generar los reportes en PDF de múltiples colegios tomaba 4 horas de trabajo manual y era propenso a errores de transcripción.",
+        case1_solution: "Pipeline en Python que consolida datos de múltiples fuentes, valida inconsistencias y genera todos los PDFs automáticamente con un solo comando.",
+        case1_metric: "4 horas → 5 minutos",
+        case1_impact: "−98% de tiempo y cero errores de transcripción desde su implementación.",
+        case2_title: "Análisis de Base de Datos SIMAT",
+        case2_problem: "Las bases SIMAT del sector educativo llegaban fragmentadas y sin formato estándar, haciendo casi imposible el análisis comparativo entre colegios.",
+        case2_solution: "Herramienta de consolidación y limpieza que unifica las bases y genera informes estadísticos automáticos por colegio y por quincena.",
+        case2_metric: "Informes en minutos",
+        case2_impact: "Análisis comparativos que antes no existían, disponibles para la toma de decisiones.",
+        tag_auto: "Automatización", tag_auto2: "Automatización", tag_fin: "Finanzas",
+        tag_agents: "Agentes", tag_trees: "Árboles", tag_redes: "Redes", tag_infra: "Infraestructura",
+        f_all: "Todos", f_infra: "Redes",
+        p_api: "API RESTful con autenticación, manejo de base de datos y documentación completa. Arquitectura limpia y escalable para aplicaciones web.",
+        p_fin_t: "App de Finanzas Personales",
+        p_fin: "Aplicación de gestión financiera con seguimiento de gastos, metas de ahorro y visualización de flujo de efectivo.",
+        p_tesis_t: "Proyecto de Tesis — ML aplicado",
+        p_tesis: "Investigación y desarrollo como proyecto de grado: análisis de datos, modelado predictivo y soluciones de ingeniería aplicada.",
+        p_agente_t: "Agente Académico Inteligente",
+        p_agente: "Agente basado en árboles de decisión para la gestión y consulta de información académica de forma automatizada.",
+        p_redes_t: "Redes & Infraestructura",
+        p_redes: "Diseño y simulación de topologías de red con Cisco Packet Tracer: routers, switches y protocolos de enrutamiento para entornos empresariales.",
+        p_apps_t: "Automatizaciones con Apps Script",
+        p_apps: "Flujos automáticos sobre Google Workspace: hojas de cálculo que se actualizan solas, correos programados e integración entre servicios.",
+        link_code: "↗ Ver código", link_code2: "↗ Ver código", link_code3: "↗ Ver código",
+        link_code4: "↗ Ver código", link_code5: "↗ Ver código", link_proj: "↗ Ver proyecto",
+        proc_tag: "// 03. cómo trabajo", proc_title: "Mi proceso",
+        proc_sub: "El mismo método en cada proyecto, del más pequeño al más grande:",
+        step1_t: "Entender el problema",
+        step1_d: "Antes de escribir una línea de código, entiendo qué duele, a quién y cuánto cuesta. El mejor código es el que resuelve el problema correcto.",
+        step2_t: "Diseñar simple",
+        step2_d: "La solución más simple que funcione. Sin sobre-ingeniería: arquitecturas claras que cualquiera del equipo pueda mantener.",
+        step3_t: "Construir e iterar",
+        step3_d: "Entrego versiones funcionales rápido y las mejoro con feedback real. Comunicación constante, sin sorpresas al final.",
+        step4_t: "Medir el impacto",
+        step4_d: "Si no se puede medir, no se hizo. Horas ahorradas, errores eliminados, decisiones habilitadas — los números cuentan la historia.",
+        ct_tag: "// 04. contacto",
+        ct_t1: "¿Tienes un problema que", ct_t2: "el software puede resolver?",
+        ct_p: "Estoy disponible para nuevos proyectos y oportunidades. Cuéntame qué necesitas y te respondo en menos de 24 horas.",
+        ct_copy: "Copiar", ct_copied: "¡Copiado! ✓",
+        foot_1: 'Diseñado & construido por <span>Dylan Cobos</span>',
+        roles: ["Ingeniero de Software", "Data Analyst", "Python Developer", "Automatizador de procesos", "Problem Solver"],
+    },
+    en: {
+        nav_about: "About", nav_projects: "Projects", nav_process: "How I work",
+        nav_contact: "Contact", nav_cta: "Let's talk →",
+        badge: "Available for new projects",
+        hero_h1a: "I build software that", hero_h1b: "saves real time.",
+        hero_desc: "I'm <strong>Dylan Cobos</strong>, Software Engineer & Data Analyst. I automate processes, build APIs and turn data into decisions — with measurable results, not promises.",
+        cta_projects: "View projects ↓", cta_cv: "Download CV ↗", cta_contact: "Contact me",
+        proof_1: "less time on reports", proof_2: "projects delivered", proof_3: "years of experience",
+        term_whoami: "Dylan Cobos — Software Engineer & Data Analyst",
+        term_hint: '// type "help" and press Enter ↓',
+        about_tag: "// 01. about me", about_title: "Who am I?",
+        about_p1: "I'm a <strong>Software Engineer & Data Analyst</strong>. My specialty: finding the manual process that costs a team hours, and replacing it with software that does it in minutes.",
+        about_p2: "I work with <strong>Python</strong>, <strong>JavaScript</strong> and data tools. I've built everything from automated report pipelines that cut 4 hours of work down to 5 minutes, to backend APIs and applied machine learning models.",
+        about_p3: "I don't get hired to write code — I get hired to <strong>solve problems</strong>. Code is just the tool.",
+        sk_lang: "Languages & Data", sk_eng: "Engineering", sk_data: "Analytics & ML",
+        sk_auto: "Automation", sk_viz: "Visualization",
+        stat_1: "Projects completed", stat_2: "Years of experience",
+        stat_3: "Time reduction achieved", stat_4: "Drive to keep learning",
+        proj_tag: "// 02. projects", proj_title: "Results, not just code",
+        proj_sub: "Every project solved a real problem. These two had the biggest impact:",
+        case_label: "★ Featured case", case_label2: "★ Featured case",
+        case1_title: "Educational Report Automation",
+        k_problem: "Problem", k_solution: "Solution", k_problem2: "Problem", k_solution2: "Solution",
+        case1_problem: "Every two weeks, generating PDF reports for multiple schools took 4 hours of manual work and was prone to transcription errors.",
+        case1_solution: "Python pipeline that consolidates data from multiple sources, validates inconsistencies and generates every PDF automatically with a single command.",
+        case1_metric: "4 hours → 5 minutes",
+        case1_impact: "−98% time and zero transcription errors since deployment.",
+        case2_title: "SIMAT Database Analysis",
+        case2_problem: "SIMAT databases from the education sector arrived fragmented and without a standard format, making cross-school comparative analysis nearly impossible.",
+        case2_solution: "Consolidation and cleaning tool that unifies the databases and generates automatic statistical reports per school and per period.",
+        case2_metric: "Reports in minutes",
+        case2_impact: "Comparative insights that didn't exist before, now available for decision-making.",
+        tag_auto: "Automation", tag_auto2: "Automation", tag_fin: "Finance",
+        tag_agents: "Agents", tag_trees: "Trees", tag_redes: "Networking", tag_infra: "Infrastructure",
+        f_all: "All", f_infra: "Networking",
+        p_api: "RESTful API with authentication, database management and complete documentation. Clean, scalable architecture for web applications.",
+        p_fin_t: "Personal Finance App",
+        p_fin: "Financial management app with expense tracking, savings goals and cash-flow visualization.",
+        p_tesis_t: "Thesis Project — Applied ML",
+        p_tesis: "Research and development as a degree project: data analysis, predictive modeling and applied engineering solutions.",
+        p_agente_t: "Academic Intelligent Agent",
+        p_agente: "Decision-tree-based agent for automated management and querying of academic information.",
+        p_redes_t: "Networking & Infrastructure",
+        p_redes: "Design and simulation of network topologies with Cisco Packet Tracer: routers, switches and routing protocols for enterprise environments.",
+        p_apps_t: "Apps Script Automations",
+        p_apps: "Automated flows on Google Workspace: self-updating spreadsheets, scheduled emails and cross-service integration.",
+        link_code: "↗ View code", link_code2: "↗ View code", link_code3: "↗ View code",
+        link_code4: "↗ View code", link_code5: "↗ View code", link_proj: "↗ View project",
+        proc_tag: "// 03. how I work", proc_title: "My process",
+        proc_sub: "Same method on every project, from the smallest to the largest:",
+        step1_t: "Understand the problem",
+        step1_d: "Before writing a line of code, I understand what hurts, who it hurts, and what it costs. The best code solves the right problem.",
+        step2_t: "Design simple",
+        step2_d: "The simplest solution that works. No over-engineering: clear architectures anyone on the team can maintain.",
+        step3_t: "Build and iterate",
+        step3_d: "I ship working versions fast and improve them with real feedback. Constant communication, no end-of-project surprises.",
+        step4_t: "Measure the impact",
+        step4_d: "If it can't be measured, it didn't happen. Hours saved, errors eliminated, decisions enabled — the numbers tell the story.",
+        ct_tag: "// 04. contact",
+        ct_t1: "Got a problem that", ct_t2: "software can solve?",
+        ct_p: "I'm available for new projects and opportunities. Tell me what you need and I'll reply within 24 hours.",
+        ct_copy: "Copy", ct_copied: "Copied! ✓",
+        foot_1: 'Designed & built by <span>Dylan Cobos</span>',
+        roles: ["Software Engineer", "Data Analyst", "Python Developer", "Process Automator", "Problem Solver"],
     }
-    type();
+};
 
-    /* ── Hamburger ── */
-    const ham = document.getElementById("ham");
-    const mob = document.getElementById("mob");
-    ham.addEventListener("click", () => {
-        ham.classList.toggle("open");
-        mob.classList.toggle("open");
+let lang = localStorage.getItem("lang") || "es";
+
+function applyLang() {
+    const dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.dataset.i18n;
+        if (dict[k]) el.textContent = dict[k];
     });
-    function closeMob() {
-        ham.classList.remove("open");
-        mob.classList.remove("open");
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const k = el.dataset.i18nHtml;
+        if (dict[k]) el.innerHTML = dict[k];
+    });
+    document.getElementById("langBtn").textContent = lang === "es" ? "EN" : "ES";
+    roles = dict.roles;
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+    lang = lang === "es" ? "en" : "es";
+    localStorage.setItem("lang", lang);
+    applyLang();
+});
+
+/* ════════ Typing animation ════════ */
+let roles = I18N[lang].roles;
+let ri = 0, ci = 0, del = false;
+const typeEl = document.getElementById("typing");
+function type() {
+    const w = roles[ri % roles.length];
+    typeEl.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci);
+    if (!del && ci >= w.length) { del = true; setTimeout(type, 2200); return; }
+    if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+    setTimeout(type, del ? 38 : 75);
+}
+applyLang();
+type();
+
+/* ════════ Terminal interactiva ════════ */
+const termBody = document.getElementById("termBody");
+const termInput = document.getElementById("termInput");
+const CMDS = {
+    es: {
+        help: `<span class="t-key">help</span>      — este menú
+<span class="t-key">about</span>     — quién soy
+<span class="t-key">projects</span>  — lo que he construido
+<span class="t-key">stack</span>     — tecnologías que domino
+<span class="t-key">contact</span>   — cómo contactarme
+<span class="t-key">cv</span>        — descargar mi CV
+<span class="t-key">hire</span>      — 😏
+<span class="t-key">clear</span>     — limpiar pantalla`,
+        about: "Ingeniero de Software & Data Analyst. Convierto procesos manuales en software que ahorra horas. Python, JavaScript y datos son mis herramientas; resolver problemas es mi trabajo.",
+        projects: "→ Automatización de reportes (4h → 5min)\n→ Análisis de bases SIMAT\n→ Backend API REST (Node.js)\n→ App de finanzas personales\n→ ML aplicado (tesis)\n→ Redes con Cisco\n\nScroll abajo para ver los detalles ↓",
+        stack: "Python · JavaScript · SQL · Node.js · Pandas · Machine Learning · Excel/VBA · Google Apps Script · Cisco",
+        contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
+        hire: "Excelente decisión. 🚀\nEscríbeme a dylanjc1290@gmail.com y empecemos.",
+        cv: "Descargando cv.pdf...",
+        notfound: (c) => `zsh: command not found: ${c}\nPrueba con <span class="t-key">help</span>`,
+    },
+    en: {
+        help: `<span class="t-key">help</span>      — this menu
+<span class="t-key">about</span>     — who I am
+<span class="t-key">projects</span>  — what I've built
+<span class="t-key">stack</span>     — technologies I use
+<span class="t-key">contact</span>   — how to reach me
+<span class="t-key">cv</span>        — download my CV
+<span class="t-key">hire</span>      — 😏
+<span class="t-key">clear</span>     — clear screen`,
+        about: "Software Engineer & Data Analyst. I turn manual processes into software that saves hours. Python, JavaScript and data are my tools; solving problems is my job.",
+        projects: "→ Report automation (4h → 5min)\n→ SIMAT database analysis\n→ Backend REST API (Node.js)\n→ Personal finance app\n→ Applied ML (thesis)\n→ Cisco networking\n\nScroll down for the details ↓",
+        stack: "Python · JavaScript · SQL · Node.js · Pandas · Machine Learning · Excel/VBA · Google Apps Script · Cisco",
+        contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
+        hire: "Excellent decision. 🚀\nEmail me at dylanjc1290@gmail.com and let's get started.",
+        cv: "Downloading cv.pdf...",
+        notfound: (c) => `zsh: command not found: ${c}\nTry <span class="t-key">help</span>`,
     }
+};
 
-    /* ── Scroll fade-in ── */
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+function termPrint(html, cls = "t-out") {
+    const div = document.createElement("div");
+    div.className = `term-line ${cls}`;
+    div.innerHTML = html;
+    termBody.insertBefore(div, termInput.parentElement);
+}
 
-    /* ── Active nav highlight ── */
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-links a");
-    window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach(s => {
-            if (window.scrollY >= s.offsetTop - 120) current = s.id;
-        });
-        navLinks.forEach(a => {
-            a.style.color = a.getAttribute("href") === `#${current}` ? "var(--accent)" : "";
-        });
+termInput.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    const raw = termInput.value.trim();
+    termInput.value = "";
+    if (!raw) return;
+    termPrint(`<span class="t-prompt">➜ ~</span> <span class="t-cmd">${raw.replace(/</g,"&lt;")}</span>`, "");
+    const cmd = raw.toLowerCase();
+    const dict = CMDS[lang];
+    const aliases = { sobre: "about", proyectos: "projects", contacto: "contact", ayuda: "help", whoami: "about" };
+    const key = aliases[cmd] || cmd;
+    if (key === "clear") {
+        termBody.querySelectorAll(".term-line").forEach(l => l.remove());
+    } else if (key === "cv") {
+        termPrint(dict.cv);
+        const a = document.createElement("a");
+        a.href = "cv.pdf"; a.download = "";
+        a.click();
+    } else if (dict[key] && key !== "notfound") {
+        termPrint(dict[key]);
+    } else {
+        termPrint(dict.notfound(raw.replace(/</g,"&lt;")));
+    }
+    termBody.scrollTop = termBody.scrollHeight;
+});
+document.getElementById("terminal").addEventListener("click", () => termInput.focus());
+
+/* ════════ Hamburger ════════ */
+const ham = document.getElementById("ham");
+const mob = document.getElementById("mob");
+ham.addEventListener("click", () => {
+    ham.classList.toggle("open");
+    mob.classList.toggle("open");
+});
+function closeMob() {
+    ham.classList.remove("open");
+    mob.classList.remove("open");
+}
+
+/* ════════ Scroll fade-in ════════ */
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll(".fade").forEach(el => obs.observe(el));
+
+/* ════════ Animated counters ════════ */
+const countObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        countObs.unobserve(e.target);
+        const target = +e.target.dataset.count;
+        const dur = 1200, t0 = performance.now();
+        function tick(t) {
+            const p = Math.min((t - t0) / dur, 1);
+            e.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
     });
+}, { threshold: 0.5 });
+document.querySelectorAll("[data-count]").forEach(el => countObs.observe(el));
+
+/* ════════ Project filters ════════ */
+const filterBtns = document.querySelectorAll(".filter-btn");
+const cards = document.querySelectorAll(".projects-grid .card");
+filterBtns.forEach(btn => btn.addEventListener("click", () => {
+    filterBtns.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const f = btn.dataset.filter;
+    cards.forEach(c => {
+        const match = f === "all" || c.dataset.cat.split(" ").includes(f);
+        c.classList.toggle("hidden", !match);
+        if (match) c.classList.add("visible");
+    });
+}));
+
+/* ════════ Copy email ════════ */
+const copyBtn = document.getElementById("copyBtn");
+copyBtn.addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText("dylanjc1290@gmail.com");
+        copyBtn.textContent = I18N[lang].ct_copied;
+        setTimeout(() => { copyBtn.textContent = I18N[lang].ct_copy; }, 2000);
+    } catch (_) {}
+});
+
+/* ════════ Scroll progress + active nav ════════ */
+const progress = document.getElementById("progress");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll", () => {
+    const h = document.documentElement;
+    progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+    let current = "";
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${current}`));
+}, { passive: true });
 </script>
 
 </body>
