@@ -455,6 +455,7 @@
             gap: 1.4rem;
             margin-bottom: 3.5rem;
         }
+        .featured .case-wide { grid-column: 1 / -1; }
         .case {
             background: linear-gradient(160deg, var(--bg-card) 0%, #0d0d0d 100%);
             border: 1px solid var(--border);
@@ -865,6 +866,8 @@
                         <div class="skills-list">
                             <span class="skill">Machine Learning</span>
                             <span class="skill">Data Analysis</span>
+                            <span class="skill">n8n</span>
+                            <span class="skill">OpenAI API</span>
                             <span class="skill" data-i18n="sk_auto">Automatización</span>
                             <span class="skill" data-i18n="sk_viz">Visualización</span>
                         </div>
@@ -902,6 +905,32 @@
 
         <!-- Case studies destacados -->
         <div class="featured">
+            <article class="case case-wide fade">
+                <span class="case-label" data-i18n="case_label0">★ Nuevo · Caso destacado</span>
+                <h3 class="case-title" data-i18n="case0_title">Recepcionista IA para Clínica Dental — WhatsApp + GPT</h3>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_problem0">Problema</span>
+                    <span class="case-v" data-i18n="case0_problem">Los pacientes escriben por WhatsApp a cualquier hora. Cada mensaje sin responder fuera de horario es un lead perdido, y agendar cada cita a mano consume al equipo de recepción.</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-k" data-i18n="k_solution0">Solución</span>
+                    <span class="case-v" data-i18n="case0_solution">Workflow en n8n donde GPT clasifica cada mensaje (cita, urgencia o consulta), extrae nombre, tratamiento y fecha deseada, verifica disponibilidad en Google Calendar, crea la cita y envía la confirmación por WhatsApp. Las urgencias avisan al móvil de la clínica al instante.</span>
+                </div>
+                <div class="case-impact">
+                    <span data-i18n="case0_metric">Respuesta en segundos, 24/7</span>
+                    <p data-i18n="case0_impact">Cero leads sin responder: clasificación, agenda y confirmación 100% automáticas, sin intervención humana.</p>
+                </div>
+                <div class="case-tags">
+                    <span class="tag">n8n</span>
+                    <span class="tag">GPT-4o</span>
+                    <span class="tag">WhatsApp API</span>
+                    <span class="tag">Google Calendar</span>
+                </div>
+                <div class="card-links" style="margin-top:1.2rem">
+                    <a href="https://github.com/dylancobos/n8n-dental-leads" class="card-link" target="_blank" rel="noopener" data-i18n="link_case0">↗ Ver código y demo</a>
+                </div>
+            </article>
+
             <article class="case fade">
                 <span class="case-label" data-i18n="case_label">★ Caso destacado</span>
                 <h3 class="case-title" data-i18n="case1_title">Automatización de Reportes Educativos</h3>
@@ -1158,8 +1187,16 @@ const I18N = {
         stat_1: "Proyectos completados", stat_2: "Años de experiencia",
         stat_3: "Reducción de tiempo lograda", stat_4: "Ganas de aprender",
         proj_tag: "// 02. proyectos", proj_title: "Resultados, no solo código",
-        proj_sub: "Cada proyecto resolvió un problema real. Estos son los dos con mayor impacto:",
+        proj_sub: "Cada proyecto resolvió un problema real. Estos son los de mayor impacto:",
         case_label: "★ Caso destacado", case_label2: "★ Caso destacado",
+        case_label0: "★ Nuevo · Caso destacado",
+        case0_title: "Recepcionista IA para Clínica Dental — WhatsApp + GPT",
+        k_problem0: "Problema", k_solution0: "Solución",
+        case0_problem: "Los pacientes escriben por WhatsApp a cualquier hora. Cada mensaje sin responder fuera de horario es un lead perdido, y agendar cada cita a mano consume al equipo de recepción.",
+        case0_solution: "Workflow en n8n donde GPT clasifica cada mensaje (cita, urgencia o consulta), extrae nombre, tratamiento y fecha deseada, verifica disponibilidad en Google Calendar, crea la cita y envía la confirmación por WhatsApp. Las urgencias avisan al móvil de la clínica al instante.",
+        case0_metric: "Respuesta en segundos, 24/7",
+        case0_impact: "Cero leads sin responder: clasificación, agenda y confirmación 100% automáticas, sin intervención humana.",
+        link_case0: "↗ Ver código y demo",
         case1_title: "Automatización de Reportes Educativos",
         k_problem: "Problema", k_solution: "Solución", k_problem2: "Problema", k_solution2: "Solución",
         case1_problem: "Cada quincena, generar los reportes en PDF de múltiples colegios tomaba 4 horas de trabajo manual y era propenso a errores de transcripción.",
@@ -1223,8 +1260,16 @@ const I18N = {
         stat_1: "Projects completed", stat_2: "Years of experience",
         stat_3: "Time reduction achieved", stat_4: "Drive to keep learning",
         proj_tag: "// 02. projects", proj_title: "Results, not just code",
-        proj_sub: "Every project solved a real problem. These two had the biggest impact:",
+        proj_sub: "Every project solved a real problem. These had the biggest impact:",
         case_label: "★ Featured case", case_label2: "★ Featured case",
+        case_label0: "★ New · Featured case",
+        case0_title: "AI Receptionist for a Dental Clinic — WhatsApp + GPT",
+        k_problem0: "Problem", k_solution0: "Solution",
+        case0_problem: "Patients message on WhatsApp at all hours. Every unanswered after-hours message is a lost lead, and booking each appointment by hand drains the front-desk team.",
+        case0_solution: "n8n workflow where GPT classifies each message (appointment, emergency or inquiry), extracts name, treatment and desired date, checks Google Calendar availability, books the appointment and sends a WhatsApp confirmation. Emergencies alert the clinic's phone instantly.",
+        case0_metric: "Replies in seconds, 24/7",
+        case0_impact: "Zero unanswered leads: classification, booking and confirmation fully automated, no human in the loop.",
+        link_case0: "↗ View code & demo",
         case1_title: "Educational Report Automation",
         k_problem: "Problem", k_solution: "Solution", k_problem2: "Problem", k_solution2: "Solution",
         case1_problem: "Every two weeks, generating PDF reports for multiple schools took 4 hours of manual work and was prone to transcription errors.",
@@ -1322,7 +1367,7 @@ const CMDS = {
 <span class="t-key">hire</span>      — 😏
 <span class="t-key">clear</span>     — limpiar pantalla`,
         about: "Ingeniero de Software & Data Analyst. Convierto procesos manuales en software que ahorra horas. Python, JavaScript y datos son mis herramientas; resolver problemas es mi trabajo.",
-        projects: "→ Automatización de reportes (4h → 5min)\n→ Análisis de bases SIMAT\n→ Backend API REST (Node.js)\n→ App de finanzas personales\n→ ML aplicado (tesis)\n→ Redes con Cisco\n\nScroll abajo para ver los detalles ↓",
+        projects: "→ Recepcionista IA para clínica dental (n8n + GPT)\n→ Automatización de reportes (4h → 5min)\n→ Análisis de bases SIMAT\n→ Backend API REST (Node.js)\n→ App de finanzas personales\n→ ML aplicado (tesis)\n→ Redes con Cisco\n\nScroll abajo para ver los detalles ↓",
         stack: "Python · JavaScript · SQL · Node.js · Pandas · Machine Learning · Excel/VBA · Google Apps Script · Cisco",
         contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
         hire: "Excelente decisión. 🚀\nEscríbeme a dylanjc1290@gmail.com y empecemos.",
@@ -1339,7 +1384,7 @@ const CMDS = {
 <span class="t-key">hire</span>      — 😏
 <span class="t-key">clear</span>     — clear screen`,
         about: "Software Engineer & Data Analyst. I turn manual processes into software that saves hours. Python, JavaScript and data are my tools; solving problems is my job.",
-        projects: "→ Report automation (4h → 5min)\n→ SIMAT database analysis\n→ Backend REST API (Node.js)\n→ Personal finance app\n→ Applied ML (thesis)\n→ Cisco networking\n\nScroll down for the details ↓",
+        projects: "→ AI receptionist for a dental clinic (n8n + GPT)\n→ Report automation (4h → 5min)\n→ SIMAT database analysis\n→ Backend REST API (Node.js)\n→ Personal finance app\n→ Applied ML (thesis)\n→ Cisco networking\n\nScroll down for the details ↓",
         stack: "Python · JavaScript · SQL · Node.js · Pandas · Machine Learning · Excel/VBA · Google Apps Script · Cisco",
         contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
         hire: "Excellent decision. 🚀\nEmail me at dylanjc1290@gmail.com and let's get started.",
