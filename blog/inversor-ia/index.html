@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversor-IA: anatomía de un analista de inversiones con LLM que no confía en sí mismo — Dylan Cobos</title>
+    <meta name="description" content="Cómo construí en 3 días un sistema de tesis de inversión con Python y Claude, y por qué el 80% de la ingeniería está en desconfiar del modelo.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Inversor-IA: anatomía de un analista de inversiones con LLM que no confía en sí mismo">
+    <meta property="og:description" content="3 días, 12 commits, 111 tests. Validadores estructurales, menús cerrados y auditoría posterior: la calidad no vive en el prompt.">
+    <meta property="og:url" content="https://manosjd.com/blog/inversor-ia/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%2300ff88' font-family='monospace'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+    <a href="/" class="nav-logo">&lt;dylan.cobos /&gt;</a>
+    <div class="nav-right">
+        <a href="/blog/" class="nav-link">Blog</a>
+        <a href="/#contact" class="nav-link hide-sm">Contacto</a>
+        <a href="/" class="nav-cta">← Inicio</a>
+    </div>
+</nav>
+
+<main class="page">
+    <p class="crumb"><span class="t-prompt">➜ ~</span> <span class="t-cmd">cat blog/inversor-ia.md</span></p>
+
+    <header>
+        <p class="section-tag">// blog técnico</p>
+        <h1 class="post-title">Inversor-IA: anatomía de un analista de inversiones con LLM que no confía en sí mismo</h1>
+        <p class="post-subtitle">
+            Cómo construí en 3 días un sistema de tesis de inversión con Python y
+            Claude, y por qué el 80% de la ingeniería está en desconfiar del modelo.
+        </p>
+        <div class="post-meta">
+            <span class="meta-chip hl">2026-07-17</span>
+            <span class="meta-chip">7 min de lectura</span>
+            <span class="meta-chip">Python</span>
+            <span class="meta-chip">Claude API</span>
+            <span class="meta-chip">SQLite</span>
+            <span class="meta-chip">LLM Engineering</span>
+        </div>
+    </header>
+
+    <div class="post-stats">
+        <div class="stat-item"><span class="stat-n">3</span><span class="stat-l">días de construcción</span></div>
+        <div class="stat-item"><span class="stat-n">12</span><span class="stat-l">commits</span></div>
+        <div class="stat-item"><span class="stat-n">111</span><span class="stat-l">tests</span></div>
+        <div class="stat-item"><span class="stat-n">~15</span><span class="stat-l">comandos de CLI</span></div>
+    </div>
+
+    <details class="toc-mobile">
+        <summary>Índice del artículo</summary>
+        <ol>
+            <li><a href="#problema">El problema y la restricción de diseño</a></li>
+            <li><a href="#stack">Stack: aburrido a propósito</a></li>
+            <li><a href="#senales">El motor de señales</a></li>
+            <li><a href="#validador">El prompt propone, el validador dispone</a></li>
+            <li><a href="#scorecard">Scorecard y sesgo retrospectivo</a></li>
+            <li><a href="#resto">El resto del sistema, en rápido</a></li>
+            <li><a href="#moraleja">Números y moraleja</a></li>
+        </ol>
+    </details>
+
+    <div class="layout">
+        <article class="post">
+            <h2 id="problema"><span class="hash">##</span>El problema y la restricción de diseño</h2>
+            <p>
+                Quería un sistema que analizara mi portafolio una vez al mes y me
+                entregara razonamiento auditable — no predicciones. Esa restricción,
+                escrita en la spec antes que ninguna línea de código, definió toda la
+                arquitectura: <strong>el sistema evalúa condiciones actuales y está
+                estructuralmente incapacitado para prometer futuros</strong>. Sin precios
+                objetivo, sin "esta acción subirá", sin conexión a brokers.
+            </p>
+            <p>La unidad central es la <em>tesis razonada</em>, con un pipeline obligatorio:</p>
+            <div class="codeblock">
+                <pre><code>datos → señales → argumentos a favor Y en contra → qué invalidaría la tesis → postura</code></pre>
+                <button class="copy-btn">copiar</button>
+            </div>
+            <p>
+                La postura sale de un menú cerrado (<code>AUMENTAR|MANTENER|REDUCIR|SALIR|VIGILAR</code>
+                para posiciones; <code>ENTRAR|ESPERAR</code> para candidatos). Y la regla
+                de oro: <strong>sin argumentos en contra, la tesis no se emite</strong>. Es un
+                control de sesgo de confirmación convertido en requisito estructural.
+            </p>
+
+            <h2 id="stack"><span class="hash">##</span>Stack: aburrido a propósito</h2>
+            <p>
+                Python 3.12, SQLite, <code>yfinance</code>, la API de Anthropic (Claude Sonnet) y
+                <code>rich</code> para la CLI. Cero frameworks. Cuatro tablas. La decisión menos
+                glamorosa y más rentable: una <strong>capa de proveedor de datos</strong> con
+                interfaz común (<code>ProveedorDatos</code>), de modo que yfinance es reemplazable
+                por EODHD (ya integrado para histórico) sin tocar señales ni tesis, y
+                una <strong>caché diaria en SQLite</strong> con patrón decorador: la clave incluye la
+                fecha (<code>AAPL:historico:2026-07-16</code>), así que expira sola a medianoche.
+            </p>
+            <div class="callout">
+                Un detalle de la caché que solo aparece operando: <strong>los resultados
+                vacíos no se cachean</strong>. yfinance, ante un fallo de red, no lanza
+                excepción — devuelve vacío. Si cacheas ese vacío, un tropiezo matinal se
+                convierte en un día entero sin datos.
+            </div>
+
+            <h2 id="senales"><span class="hash">##</span>El motor de señales: matemática que no se negocia</h2>
+            <p>
+                RSI(14) con suavizado de Wilder, SMA50/200, MACD(12,26,9), volatilidad
+                anualizada, distancia a extremos de 52 semanas. Cada indicador devuelve
+                valor numérico <strong>y lectura en lenguaje humano</strong> ("RSI 74 → sobrecompra"),
+                porque el sistema es también una herramienta de aprendizaje.
+            </p>
+            <p>
+                La verificación fue doble: el dataset clásico de Wilder (el RSI debe dar
+                exactamente los valores publicados: 70.53, 57.97) y una implementación
+                independiente con pandas como referencia — coincidencia a 4 decimales
+                sobre datos reales. Los bordes importan más de lo que parece: un solo
+                cierre en 0 (dato sucio real de Yahoo) rompía el logaritmo de la
+                volatilidad; una serie plana producía "RSI 100 → sobrecompra" sin que
+                nada hubiera subido. Cada borde terminó como test.
+            </p>
+
+            <h2 id="validador"><span class="hash">##</span>La lección central: el prompt propone, el validador dispone</h2>
+            <p>
+                El generador arma un contexto JSON por ticker (señales calculadas,
+                fundamentales, titulares del mes, catalizadores, la posición y la tesis
+                del mes anterior) y llama al modelo con un prompt versionado en el repo
+                que <strong>solo cambia con aprobación humana explícita</strong>. Hasta ahí, lo
+                fácil.
+            </p>
+            <p>
+                Lo difícil: la respuesta no se acepta — se <strong>valida estructuralmente</strong>.
+                Mi primera versión buscaba subcadenas ("¿aparece 'argumentos en
+                contra'?") y un panel de agentes revisores la destrozó con contraejemplos
+                ejecutables: una tesis que <em>enumera</em> las secciones en un párrafo
+                introductorio validaba sin tenerlas; "no hay razones para SALIR; lo
+                sensato es MANTENER" registraba la postura opuesta al texto. La versión
+                final parsea las <strong>secciones reales</strong> del documento (encabezados), exige
+                contenido mínimo en cada una y una postura <strong>única e inequívoca dentro
+                de su sección</strong>. Si el modelo menciona dos opciones del menú, se rechaza
+                y se reintenta explicándole el motivo exacto. Tras N intentos, el
+                sistema prefiere fallar ruidosamente antes que archivar una tesis
+                coja.
+            </p>
+            <div class="callout">
+                Otro clásico de producción: la primera tesis real llegó cortada por
+                <code>max_tokens</code> y el validador la rechazó tres veces por "faltar" justo las
+                secciones finales. La corrección no fue solo subir el límite: fue
+                <strong>detectar <code>stop_reason == "max_tokens"</code> y tratarlo como problema
+                distinto</strong>, porque reintentarle a un modelo con el mismo techo es tirar
+                dinero.
+            </div>
+
+            <h2 id="scorecard"><span class="hash">##</span>El sistema que se audita: scorecard y sesgo retrospectivo</h2>
+            <p>
+                Cada revisión mensual abre auditando las tesis del mes anterior. Un
+                segundo prompt (también versionado, también con gate humano) dictamina
+                <code>SOSTENIDA|INVALIDADA</code> con una regla que me importa más que cualquier
+                métrica: si una condición de invalidación declarada ocurrió, la tesis
+                está invalidada <strong>aunque el precio haya acompañado</strong>. Se audita el
+                razonamiento, no la suerte.
+            </p>
+            <p>
+                Y la decisión de diseño más contraintuitiva: <strong>me negué a generar tesis
+                retroactivas</strong> para fabricar historial. Podía reconstruir los precios de
+                mayo, pero no los fundamentales point-in-time ni las noticias de
+                entonces — y el modelo ya sabe el final de la película. Eso tiene
+                nombre: sesgo retrospectivo (look-ahead bias). Un historial corto y
+                limpio vale más que uno largo y contaminado.
+            </p>
+            <p>
+                Entre revisiones, un comando de vigilancia compara las señales
+                archivadas en el <code>contexto_json</code> de cada tesis (auditoría por diseño:
+                toda tesis guarda los datos con los que se razonó) contra las de hoy, y
+                reporta cambios de régimen objetivos — cruce de medias invertido,
+                pérdida de la SMA50, RSI en zona extrema — junto al texto de
+                invalidación que la tesis declaró. Deliberadamente <strong>no</strong> interpreta ese
+                texto con IA: detecta hechos y deja el juicio al humano.
+            </p>
+
+            <h2 id="resto"><span class="hash">##</span>El resto del sistema, en rápido</h2>
+            <ul>
+                <li>
+                    <strong>Dashboard</strong>: un HTML autocontenido generado por Python — sparklines
+                    SVG dibujados a mano (sin librerías), CSS inline, cero peticiones
+                    salientes. El markdown de cada tesis se re-renderiza <strong>escapando todo
+                    primero</strong> (el texto viene de un LLM: nada de HTML crudo en mi página)
+                    y rebajando su jerarquía de encabezados para no romper el documento.
+                </li>
+                <li>
+                    <strong>Explorador</strong>: screener sobre un universo curado (~90 tickers por
+                    sectores) filtrado por un <code>perfil.json</code> editable. Reusa el motor de
+                    señales verificado y produce un puntaje <strong>con motivos legibles</strong> —
+                    nada de cajas negras. Su primer hallazgo real: una large-cap en
+                    sobreventa profunda tras un desplome por earnings, detectada por pura
+                    matemática.
+                </li>
+                <li>
+                    <strong>Operación</strong>: LaunchAgent mensual (día 1, 9:00) que corre revisión +
+                    dashboard + respaldo. Los datos personales (base SQLite, reportes,
+                    dashboard) viven fuera de git; el código, en un repo privado.
+                </li>
+            </ul>
+
+            <h2 id="moraleja"><span class="hash">##</span>Números y moraleja</h2>
+            <p>
+                3 días, 12 commits, 111 tests, ~15 comandos de CLI. Construido en pareja
+                con Claude Code, hito por hito, con revisión humana en cada gate y
+                paneles de agentes revisores que encontraron bugs reales ejecutando el
+                código (el mejor: la caché que "envenenaba" el día entero con un fallo
+                transitorio).
+            </p>
+            <div class="callout">
+                Si me llevo una sola idea: <strong>con LLMs, la calidad de un sistema no vive
+                en el prompt — vive en todo lo que construyes alrededor para no tener
+                que confiar en él.</strong> Validadores estructurales, menús cerrados, datos
+                citables, auditoría posterior y la humildad de declarar qué invalidaría
+                tu propia conclusión. Que es, curiosamente, lo mismo que le pido ahora a
+                mis inversiones.
+            </div>
+
+            <p class="post-footer">
+                Sistema educativo de apoyo a decisión. No es asesoría financiera.
+            </p>
+        </article>
+
+        <aside class="toc" aria-label="Índice del artículo">
+            <p class="toc-title">// índice</p>
+            <ol>
+                <li><a href="#problema">El problema y la restricción</a></li>
+                <li><a href="#stack">Stack: aburrido a propósito</a></li>
+                <li><a href="#senales">El motor de señales</a></li>
+                <li><a href="#validador">El validador dispone</a></li>
+                <li><a href="#scorecard">Scorecard y sesgo</a></li>
+                <li><a href="#resto">El resto del sistema</a></li>
+                <li><a href="#moraleja">Números y moraleja</a></li>
+            </ol>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <p><a href="/blog/">← Volver al blog</a></p>
+    <p>Diseñado &amp; construido por <span>Dylan Cobos</span></p>
+    <p>© 2026 · <a href="/">manosjd.com</a></p>
+</footer>
+
+<script>
+/* ════════ Barra de progreso de lectura ════════ */
+const progress = document.getElementById("progress");
+window.addEventListener("scroll", () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + "%";
+}, { passive: true });
+
+/* ════════ Scrollspy del índice ════════ */
+const tocLinks = document.querySelectorAll(".toc a");
+const headings = [...document.querySelectorAll(".post h2")];
+function updateToc() {
+    let current = headings[0]?.id;
+    headings.forEach(h => { if (h.getBoundingClientRect().top < 130) current = h.id; });
+    tocLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${current}`));
+}
+window.addEventListener("scroll", updateToc, { passive: true });
+updateToc();
+
+/* ════════ Copiar bloques de código ════════ */
+document.querySelectorAll(".codeblock").forEach(block => {
+    const btn = block.querySelector(".copy-btn");
+    if (!btn) return;
+    btn.addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(block.querySelector("code").textContent);
+            btn.textContent = "¡copiado!";
+            setTimeout(() => { btn.textContent = "copiar"; }, 1800);
+        } catch (_) {}
+    });
+});
+
+/* ════════ Cerrar el índice móvil al navegar ════════ */
+document.querySelectorAll(".toc-mobile a").forEach(a => {
+    a.addEventListener("click", () => document.querySelector(".toc-mobile").removeAttribute("open"));
+});
+</script>
+
+</body>
+</html>

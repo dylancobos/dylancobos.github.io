@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog técnico — Dylan Cobos</title>
+    <meta name="description" content="Escritura técnica para ingenieros: arquitectura, decisiones de diseño y lecciones construyendo software con IA. Por Dylan Cobos.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Blog técnico — Dylan Cobos">
+    <meta property="og:description" content="Arquitectura, decisiones de diseño y lecciones construyendo software con IA.">
+    <meta property="og:url" content="https://manosjd.com/blog/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%2300ff88' font-family='monospace'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+    <a href="/" class="nav-logo">&lt;dylan.cobos /&gt;</a>
+    <div class="nav-right">
+        <a href="/#projects" class="nav-link hide-sm">Proyectos</a>
+        <a href="/#contact" class="nav-link hide-sm">Contacto</a>
+        <a href="/" class="nav-cta">← Volver al inicio</a>
+    </div>
+</nav>
+
+<main class="page">
+    <p class="crumb"><span class="t-prompt">➜ ~</span> <span class="t-cmd">ls blog/</span></p>
+    <p class="section-tag">// blog técnico</p>
+    <h1 class="post-title">Para ingenieros</h1>
+    <p class="post-subtitle">
+        Escritura técnica sobre lo que construyo: arquitectura, decisiones de diseño,
+        bugs con moraleja y lo que aprendo trabajando con LLMs en producción.
+    </p>
+
+    <a class="post-card fade visible" href="inversor-ia/">
+        <div class="post-meta" style="margin-bottom:0">
+            <span class="meta-chip hl">2026-07-17</span>
+            <span class="meta-chip">7 min de lectura</span>
+            <span class="meta-chip">Python</span>
+            <span class="meta-chip">Claude API</span>
+            <span class="meta-chip">LLM Engineering</span>
+        </div>
+        <h2>Inversor-IA: anatomía de un analista de inversiones con LLM que no confía en sí mismo</h2>
+        <p class="excerpt">
+            Cómo construí en 3 días un sistema de tesis de inversión con Python y Claude,
+            y por qué el 80% de la ingeniería está en desconfiar del modelo: validadores
+            estructurales, menús cerrados, auditoría posterior y cero predicciones.
+        </p>
+        <span class="read-more">↗ Leer artículo</span>
+    </a>
+
+    <div class="coming-soon">// más artículos en camino — vuelve pronto</div>
+</main>
+
+<footer>
+    <p>Diseñado &amp; construido por <span>Dylan Cobos</span></p>
+    <p>© 2026 · <a href="/">manosjd.com</a></p>
+</footer>
+
+<script>
+const progress = document.getElementById("progress");
+window.addEventListener("scroll", () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + "%";
+}, { passive: true });
+</script>
+
+</body>
+</html>

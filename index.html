@@ -746,6 +746,7 @@
             <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
             <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
             <li><a href="#process" data-i18n="nav_process">Cómo trabajo</a></li>
+            <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
             <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
         </ul>
         <button class="lang-toggle" id="langBtn" aria-label="Switch language">EN</button>
@@ -760,6 +761,7 @@
     <a href="#about" onclick="closeMob()" data-i18n="nav_about">Sobre mí</a>
     <a href="#projects" onclick="closeMob()" data-i18n="nav_projects">Proyectos</a>
     <a href="#process" onclick="closeMob()" data-i18n="nav_process">Cómo trabajo</a>
+    <a href="#blog" onclick="closeMob()" data-i18n="nav_blog">Blog</a>
     <a href="#contact" onclick="closeMob()" data-i18n="nav_contact">Contacto</a>
 </div>
 
@@ -1121,12 +1123,44 @@
     </div>
 </section>
 
+<!-- ════════ BLOG ════════ -->
+<section id="blog" style="border-top:1px solid var(--border)">
+    <div class="section-wrap">
+        <p class="section-tag" data-i18n="blog_tag">// 04. blog técnico</p>
+        <h2 class="section-title" data-i18n="blog_title">Para ingenieros</h2>
+        <p class="section-sub" data-i18n="blog_sub">Escritura técnica sobre lo que construyo: arquitectura, decisiones de diseño y lecciones trabajando con LLMs.</p>
+
+        <article class="case case-wide fade">
+            <span class="case-label" data-i18n="blog_label">★ Último artículo</span>
+            <h3 class="case-title">Inversor-IA: anatomía de un analista de inversiones con LLM que no confía en sí mismo</h3>
+            <div class="case-row">
+                <span class="case-k">TL;DR</span>
+                <span class="case-v" data-i18n="blog_p1_d">Cómo construí en 3 días un sistema de tesis de inversión con Python y Claude — y por qué el 80% de la ingeniería está en desconfiar del modelo: validadores estructurales, menús cerrados, auditoría posterior y cero predicciones.</span>
+            </div>
+            <div class="case-impact">
+                <span>3 días · 12 commits · 111 tests</span>
+                <p data-i18n="blog_p1_i">La calidad de un sistema con LLMs no vive en el prompt — vive en todo lo que construyes alrededor para no tener que confiar en él.</p>
+            </div>
+            <div class="case-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Claude API</span>
+                <span class="tag">SQLite</span>
+                <span class="tag">LLM Engineering</span>
+            </div>
+            <div class="card-links" style="margin-top:1.2rem">
+                <a href="blog/inversor-ia/" class="card-link" data-i18n="blog_read">↗ Leer artículo</a>
+                <a href="blog/" class="card-link" data-i18n="blog_all">→ Ver todo el blog</a>
+            </div>
+        </article>
+    </div>
+</section>
+
 <!-- ════════ CONTACT ════════ -->
 <section id="contact">
     <div class="contact-glow"></div>
     <div class="section-wrap">
         <div class="contact-inner">
-            <p class="section-tag" data-i18n="ct_tag">// 04. contacto</p>
+            <p class="section-tag" data-i18n="ct_tag">// 05. contacto</p>
             <h2 class="contact-title"><span data-i18n="ct_t1">¿Tienes un problema que</span> <em data-i18n="ct_t2">el software puede resolver?</em></h2>
             <p data-i18n="ct_p">
                 Estoy disponible para nuevos proyectos y oportunidades.
@@ -1180,7 +1214,7 @@
 const I18N = {
     es: {
         nav_about: "Sobre mí", nav_projects: "Proyectos", nav_process: "Cómo trabajo",
-        nav_contact: "Contacto", nav_cta: "Hablemos →",
+        nav_blog: "Blog", nav_contact: "Contacto", nav_cta: "Hablemos →",
         badge: "Disponible para nuevos proyectos",
         hero_h1a: "Construyo software que", hero_h1b: "ahorra tiempo real.",
         hero_desc: 'Soy <strong>Dylan Cobos</strong>, Ingeniero de Software & Data Analyst. Automatizo procesos, construyo APIs y convierto datos en decisiones — con resultados medibles, no promesas.',
@@ -1252,7 +1286,13 @@ const I18N = {
         step3_d: "Entrego versiones funcionales rápido y las mejoro con feedback real. Comunicación constante, sin sorpresas al final.",
         step4_t: "Medir el impacto",
         step4_d: "Si no se puede medir, no se hizo. Horas ahorradas, errores eliminados, decisiones habilitadas — los números cuentan la historia.",
-        ct_tag: "// 04. contacto",
+        blog_tag: "// 04. blog técnico", blog_title: "Para ingenieros",
+        blog_sub: "Escritura técnica sobre lo que construyo: arquitectura, decisiones de diseño y lecciones trabajando con LLMs.",
+        blog_label: "★ Último artículo",
+        blog_p1_d: "Cómo construí en 3 días un sistema de tesis de inversión con Python y Claude — y por qué el 80% de la ingeniería está en desconfiar del modelo: validadores estructurales, menús cerrados, auditoría posterior y cero predicciones.",
+        blog_p1_i: "La calidad de un sistema con LLMs no vive en el prompt — vive en todo lo que construyes alrededor para no tener que confiar en él.",
+        blog_read: "↗ Leer artículo", blog_all: "→ Ver todo el blog",
+        ct_tag: "// 05. contacto",
         ct_t1: "¿Tienes un problema que", ct_t2: "el software puede resolver?",
         ct_p: "Estoy disponible para nuevos proyectos y oportunidades. Cuéntame qué necesitas y te respondo en menos de 24 horas.",
         ct_copy: "Copiar", ct_copied: "¡Copiado! ✓",
@@ -1261,7 +1301,7 @@ const I18N = {
     },
     en: {
         nav_about: "About", nav_projects: "Projects", nav_process: "How I work",
-        nav_contact: "Contact", nav_cta: "Let's talk →",
+        nav_blog: "Blog", nav_contact: "Contact", nav_cta: "Let's talk →",
         badge: "Available for new projects",
         hero_h1a: "I build software that", hero_h1b: "saves real time.",
         hero_desc: "I'm <strong>Dylan Cobos</strong>, Software Engineer & Data Analyst. I automate processes, build APIs and turn data into decisions — with measurable results, not promises.",
@@ -1333,7 +1373,13 @@ const I18N = {
         step3_d: "I ship working versions fast and improve them with real feedback. Constant communication, no end-of-project surprises.",
         step4_t: "Measure the impact",
         step4_d: "If it can't be measured, it didn't happen. Hours saved, errors eliminated, decisions enabled — the numbers tell the story.",
-        ct_tag: "// 04. contact",
+        blog_tag: "// 04. tech blog", blog_title: "For engineers",
+        blog_sub: "Technical writing about what I build: architecture, design decisions and lessons from working with LLMs.",
+        blog_label: "★ Latest article",
+        blog_p1_d: "How I built a reasoned investment-thesis system with Python and Claude in 3 days — and why 80% of the engineering is about not trusting the model: structural validators, closed menus, post-hoc auditing and zero predictions. (Article in Spanish.)",
+        blog_p1_i: "The quality of an LLM system doesn't live in the prompt — it lives in everything you build around it so you never have to trust it.",
+        blog_read: "↗ Read article", blog_all: "→ View all posts",
+        ct_tag: "// 05. contact",
         ct_t1: "Got a problem that", ct_t2: "software can solve?",
         ct_p: "I'm available for new projects and opportunities. Tell me what you need and I'll reply within 24 hours.",
         ct_copy: "Copy", ct_copied: "Copied! ✓",
@@ -1387,6 +1433,7 @@ const CMDS = {
         help: `<span class="t-key">help</span>      — este menú
 <span class="t-key">about</span>     — quién soy
 <span class="t-key">projects</span>  — lo que he construido
+<span class="t-key">blog</span>      — artículos técnicos
 <span class="t-key">stack</span>     — tecnologías que domino
 <span class="t-key">contact</span>   — cómo contactarme
 <span class="t-key">cv</span>        — descargar mi CV
@@ -1398,12 +1445,14 @@ const CMDS = {
         contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
         hire: "Excelente decisión. 🚀\nEscríbeme a dylanjc1290@gmail.com y empecemos.",
         cv: "Descargando cv.pdf...",
+        blog: `📝 Blog técnico — para ingenieros:\n→ Inversor-IA: anatomía de un analista con LLM que no confía en sí mismo\n\n<a href="blog/" class="t-key" style="text-decoration:underline">Abrir /blog/ ↗</a>`,
         notfound: (c) => `zsh: command not found: ${c}\nPrueba con <span class="t-key">help</span>`,
     },
     en: {
         help: `<span class="t-key">help</span>      — this menu
 <span class="t-key">about</span>     — who I am
 <span class="t-key">projects</span>  — what I've built
+<span class="t-key">blog</span>      — technical articles
 <span class="t-key">stack</span>     — technologies I use
 <span class="t-key">contact</span>   — how to reach me
 <span class="t-key">cv</span>        — download my CV
@@ -1415,6 +1464,7 @@ const CMDS = {
         contact: "📧 dylanjc1290@gmail.com\n🐙 github.com/dylancobos\n💼 linkedin.com/in/dylancobos",
         hire: "Excellent decision. 🚀\nEmail me at dylanjc1290@gmail.com and let's get started.",
         cv: "Downloading cv.pdf...",
+        blog: `📝 Tech blog — for engineers:\n→ Inversor-IA: anatomy of an LLM investment analyst that doesn't trust itself\n\n<a href="blog/" class="t-key" style="text-decoration:underline">Open /blog/ ↗</a>`,
         notfound: (c) => `zsh: command not found: ${c}\nTry <span class="t-key">help</span>`,
     }
 };
@@ -1434,7 +1484,7 @@ termInput.addEventListener("keydown", (e) => {
     termPrint(`<span class="t-prompt">➜ ~</span> <span class="t-cmd">${raw.replace(/</g,"&lt;")}</span>`, "");
     const cmd = raw.toLowerCase();
     const dict = CMDS[lang];
-    const aliases = { sobre: "about", proyectos: "projects", contacto: "contact", ayuda: "help", whoami: "about" };
+    const aliases = { sobre: "about", proyectos: "projects", contacto: "contact", ayuda: "help", whoami: "about", articulos: "blog", "artículos": "blog" };
     const key = aliases[cmd] || cmd;
     if (key === "clear") {
         termBody.querySelectorAll(".term-line").forEach(l => l.remove());
